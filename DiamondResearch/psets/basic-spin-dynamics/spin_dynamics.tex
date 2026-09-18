@@ -1,0 +1,349 @@
+\documentclass[12pt]{article}
+\input{template.tex}
+
+\fancyhead[CO,C]{\textbf{Basic Spin Dynamics}}
+\fancyhead[RO,R]{Initial}
+
+\newcommand{\HH}{\mathcal{H}}
+
+\begin{document}
+\begin{exc}{1a}
+    Eigenstates of spin-1/2 in magnetic field. 
+\end{exc}
+\begin{ans}
+    $\HH = -\gamma \vec B \cdot \vec S$. Orient axes so that $\vec B = B \hat z$. Then, $\HH = -\gamma BS_z \implies$ stationary states are eigenstates of $S_z$, i.e $\ket{\uparrow}, \ket{\downarrow}$ with energies $\HH \ket{\uparrow} = -\frac{\gamma \hbar B}{2}\ket{\uparrow}$ and $\HH \ket{\downarrow} = \frac{\gamma \hbar B}{2}\ket{\downarrow}$.
+\end{ans}
+
+% \begin{q2}
+% \textbf{Q} What does `real space' mean for spin states?
+% \end{q2}
+
+
+\begin{exc}{1c}
+    Spin 1/2 system in magnetic field $\vec B = (B_x, 0, B_z)$. 
+\end{exc}
+\begin{ans}
+Expressing $\HH$ in matrix form w.r.t $S_z$ basis gives
+    \[\HH = -\frac{\gamma \hbar}{2}\ab(B_x\begin{pmatrix}
+        0 & 1 \\ 
+        1 & 0 \\
+    \end{pmatrix} + B_z\begin{pmatrix}
+        1 & 0 \\ 
+        0 & -1 \\
+    \end{pmatrix}) = -\frac{\gamma \hbar}{2}\begin{pmatrix}
+        B_z & B_x \\ 
+        B_x & -B_z \\
+    \end{pmatrix}\]
+    Need to solve IVP 
+    \[
+    i\hbar \odv{\ket{\psi(t)}}{t} = \HH \ket{\psi(t)}, \qquad \ket{\psi(0)} = \ket{\uparrow}
+    \]
+
+    Express $\ket{\psi(t)} = \begin{pmatrix}
+        a(t) \\ 
+        b(t) \\
+    \end{pmatrix}$ 
+    so that we have the system of ODEs
+    \begin{align*}
+        \dot a &= \hat{\gamma}\ab(B_z a + B_x b), \qquad a(0) = 1 \\
+        \dot b &= \hat{\gamma}\ab(B_x a - B_z b), \qquad b(0) = 0
+    \end{align*}
+    where $\hat \gamma = i\gamma / 2$. Differentiating again yields 
+    \begin{align*}
+        \ddot a &= \hat \gamma B_z \dot a + \hat \gamma B_x \dot b \\ 
+        &= \hat \gamma B_z \ab(\hat \gamma B_z a + \hat \gamma B_x b) + \hat \gamma B_x \ab(\hat \gamma B_x a - \hat \gamma B_z b) \\
+        &= \hat \gamma^2 |B|^2a \\
+        &= -\frac{\gamma^2}{4}|B|^2 a
+    \end{align*}
+    where $|B|^2 = B_x^2 + B_z^2$. Similarly, $\ddot b = -\frac{\gamma^2}{4}|B|^2 b$
+    These are SHM equations with solutions, 
+    \begin{align*}
+        a(t) &= C \cos\ab(\frac{\gamma|B|t}{2}) + D\sin\ab(\frac{\gamma|B|t}{2})\\ 
+        b(t) &= E \cos\ab(\frac{\gamma|B|t}{2}) + F \sin\ab(\frac{\gamma|B|t}{2})
+    \end{align*}
+    Plugging in I.Cs gives 
+    \begin{align*}
+        a(0) &= C = 1\\ 
+        b(0) &= E = 0\\
+        \dot a(0) &= \hat \gamma B_z = D\frac{\gamma|B|}{2} \implies D = \frac{2\hat \gamma B_z}{\gamma |B|} = i\frac{B_z}{|B|} \\
+        \dot b(0) &= \hat \gamma B_x = F\frac{\gamma|B|}{2} \implies F = \frac{2\hat \gamma B_x}{\gamma |B|} = i\frac{B_x}{|B|}
+    \end{align*}
+    So, the solution is 
+    \begin{align*}
+        \ket{\psi(t)} = \begin{pmatrix}
+            \cos\ab(\frac{\gamma|B|t}{2}) + \frac{iB_z}{|B|}\sin\ab(\frac{\gamma|B|t}{2})\\
+            \frac{iB_x}{|B|}\sin\ab(\frac{\gamma|B|t}{2})
+        \end{pmatrix}
+    \end{align*}
+    Then, the probability of measuring spin up at time $t = \tau$ is 
+    \begin{align*}
+        |a(\tau)|^2 &= \ab|\cos\ab(\frac{\gamma|B|\tau}{2}) + \frac{iB_z}{|B|}\sin\ab(\frac{\gamma|B|\tau}{2})|^2\\ 
+        &= \cos^2\ab(\frac{\gamma|B|\tau}{2}) + \frac{B_z^2}{|B|^2}\sin^2\ab(\frac{\gamma|B|\tau}{2})
+    \end{align*}
+    Note $B_x \to 0 \implies |B|^2 \to B_z^2 \implies |a(\tau)|^2 \to 1$. 
+\end{ans}
+
+
+% \section{Rotating Wave Approximation and Rabi oscillations}
+
+\newpage 
+\begin{exc}{2a}
+    Write down the (time-dependent) Hamiltonian for the spin-1/2 system
+\end{exc}
+\begin{ans}
+\[\HH = - \gamma \vb S \cdot \vb B = -\gamma[S_z B_0 + S_x B_1 \cos \nu t]\]
+\end{ans}
+
+\begin{exc}{2b}
+    Derive ODE for system expressing $\ket \chi = a(t) \ket{0} + b(t) \ket{1}$ where $S_z \ket{0} = \hbar/2 \ket 0$ and $S_z \ket{1} = -\hbar/2 \ket 1$.
+\end{exc}
+\begin{ans}
+    Have 
+    \begin{align*}
+        \HH \ket \chi 
+        &= -\frac{\gamma \hbar}{2}(a(t)B_0 \ket 0 - b(t) B_0\ket 1 + a(t)B_1 \cos (\nu t)\ket 1  + b(t)B_1 \cos(\nu t)\ket 0)\\
+        &= -\frac{\gamma \hbar}{2}((a(t)B_0 + b(t)B_1 \cos(\nu t)\ket 0 ) + (a(t)B_1 \cos(\nu t) - b(t)B_0)\ket 1 )
+    \end{align*}
+    Schrödinger gives $\HH \ket \chi = i\hbar \odv{\ket \chi}{t} = \dot a(t) \ket 0 + \dot b(t) \ket 1$. Setting equal to above and using orthonormality of basis, can decompose into 
+    \begin{align}
+     \dot a(t) &= i\frac{\omega}{2} a(t) + i\Omega \cos(\nu t)b(t)\\ 
+    \dot b(t) &= -i \frac{\omega}{2} b(t) + i \Omega \cos(\nu t)a(t)
+    \end{align}
+    with 
+    \[\boxed{\omega = \gamma B_0} \qquad \boxed{\Omega = \frac12\gamma B_1}\]
+\end{ans}
+\begin{exc}{2c}
+    Derive using rotating frame $a(t) = \alpha(t)e^{i\nu t/2}, b(t) = \beta(t)e^{-i\nu t/2}$ and Rotating Wave Approximation $(\nu \gg \omega, \Omega)$.
+\end{exc}
+\begin{ans}
+    \begin{align}
+        \dot\alpha(t) &= i\frac{\delta}2\alpha(t) + i \frac{\Omega}2 \beta(t) \\ 
+        \dot \beta (t) &= -i\frac{\delta}2\beta(t) + i \frac{\Omega}2 \alpha(t)
+    \end{align}
+\end{ans}
+\begin{exc}{2d}
+Solve system with IC $\ket{\chi(0)} = \ket 0$
+\end{exc}
+\begin{ans}
+Equivalent to 1C, get 
+\[\begin{pmatrix}
+    \alpha(t) \\ 
+    \beta(t) 
+\end{pmatrix} = 
+\begin{pmatrix}
+    \displaystyle \cos\ab(\frac12 \Omega_R t) + i \frac{\delta }{\Omega_R} \sin\ab(\frac12 \Omega_R t) \\[1em] 
+    \displaystyle i \frac{\Omega}{\Omega_R}\sin\ab(\frac12 \Omega_R t)
+\end{pmatrix}
+\]
+\end{ans}
+\begin{exc}{2e}
+    Solve system at resonance $\delta = 0$ with $\Omega(t)$ time-dependent. 
+\end{exc}
+\begin{ans}
+\begin{align*}
+    \dot \alpha(t) &= \frac{i\Omega(t)}{2}\beta(t) \\ 
+    \dot \beta(t) &= \frac{i\Omega(t)}{2}\alpha(t)
+\end{align*}
+Set $f = \alpha - \beta$ and $g = \alpha + \beta$. Then, we can express the system as 
+\begin{align*}
+    \dot f &= -\frac{i\Omega(t)}{2}f \\ 
+    \dot g &= \frac{i\Omega(t)}{2}g
+\end{align*}
+Using $A(t) = \int^t \Omega(\tau)d\tau$, separating variables and solving gives 
+\[f(t) = Ce^{-iA(t)/2}, \qquad g(t) = De^{iA(t)/2}\]
+I.Cs give $f(0) = \alpha(0) - \beta(0) = 1$ and $g(0) = \alpha(0) + \beta(0) = 1$. So, $C = D = 1$. Returning to $\alpha, \beta$, we have 
+\begin{align*}
+    \alpha(t) &= \frac{1}{2}\ab(f(t) + g(t)) = \frac{1}{2}\ab(e^{-iA(t)/2} + e^{iA(t)/2}) = \cos\ab(\frac{A(t)}{2})\\
+    \beta(t) &= \frac{1}{2}\ab(g(t) - f(t)) = \frac{1}{2}\ab(e^{iA(t)/2} - e^{-iA(t)/2}) = i\sin\ab(\frac{A(t)}{2})
+\end{align*}
+\end{ans}
+
+
+\begin{exc}{2g}
+    Write Hamiltonian for RWA ODE system 
+\end{exc}
+\begin{ans}
+    \[i\hbar \odv{}{t}\begin{pmatrix}
+        \alpha(t) \\ \beta(t)
+    \end{pmatrix}
+    = -\frac{\hbar}{2}\begin{pmatrix}
+        \delta & \Omega \\ 
+        \Omega & -\delta
+    \end{pmatrix}
+    \begin{pmatrix}
+        \alpha(t) \\ \beta(t)
+    \end{pmatrix}
+    \]
+\end{ans}
+
+\begin{exc}{2h}
+    Eigenstates of $\hat{\vb{H}}_{RWA}$? Eigenstates when $\Omega \gg \delta$ and $\delta \gg \Omega$ ? Plot eigenenergies for fixed $\Omega$. Energy splitting at $\delta = 0$?
+\end{exc}
+\begin{ans}
+    Eigenstates found identically to question 1. Get 
+    \[\ket{E_\pm} = \begin{pmatrix}
+        \delta \pm \sqrt{\delta^2 + \Omega^2}\\
+        \Omega
+    \end{pmatrix}, \qquad E_{\pm} = \pm \frac12\sqrt{\delta^2 + \Omega^2}\]
+    For $\delta \gg \Omega$, hamiltonian looks diagonal so expect basis states to be eigenstates. For $\Omega \gg \delta$, hamiltonian looks like $\sigma_x$ so expect symmetric and antisymmetric combinations of basis states to be eigenstates.
+
+    Splitting at resonance is given by $E_+(\delta = 0) - E_-(\delta = 0) = \sqrt{\Omega^2} - (-\sqrt{\Omega^2}) = \Omega$
+\end{ans}
+
+\begin{exc}{2i}
+     How does this entire analysis change if $\vec B_1||\vu y?$ Determine 
+$\vb H_{RWA}$ for $\vec B_{AC} = B_1(\cos\theta, \sin\theta,0)\cos\nu t$. You
+should find it behaves exactly the same as if $\vec B_{AC} = B_1(1, 0, 0)\cos(\vu t - \theta)$!
+\end{exc}
+\begin{proof}
+    Recalling $S_y\ket{0} = i\frac\hbar 2\ket{1}$ and $S_y \ket{1} = -i\frac\hbar2\ket{0}$, we see that 
+\begin{align*}
+     \HH \ket \chi 
+        &= -\frac{\gamma \hbar}{2}(a(t)B_0 \ket 0 - b(t) B_0\ket 1 + a(t)B_1 \cos (\nu t)\ket 1  + b(t)B_1 \cos(\nu t)\ket 0)\\
+        &= -\frac{\gamma \hbar}{2}((a(t)B_0 + b(t)B_1 \cos(\nu t)\ket 0 ) + (a(t)B_1 \cos(\nu t) - b(t)B_0)\ket 1 )
+\end{align*}
+
+Setting up as before, we find 
+\begin{align*}
+    \dot a(t) &= \frac{i\omega}{2}a(t) + i\Omega\cos(\nu t)e^{-i\theta}b(t) \\ 
+    \dot b(t) &= -\frac{i\omega}{2}b(t) + i\Omega\cos(\nu t)e^{-i\theta}a(t) 
+\end{align*}
+We can proceed as before in the rotating frame using $\alpha(t) = a(t)e^{i\nu t/2}$ and $\beta(t) = b(t)e^{-i\nu t/2}$ and get the equations 
+\begin{align*}
+    \dot \alpha(t) &= \frac{i\delta}{2}\alpha(t) + i\frac{\Omega}{2}(1 + e^{-2i\nu t})e^{-i\theta}\beta(t) \\ 
+    \dot b(t) &= -\frac{i\delta}{2}\beta(t) + i\frac{\Omega}2 (1 + e^{2i\nu t})e^{i\theta}\alpha(t)
+\end{align*}
+Applying the rotatin wave approximation makes the $e^{\pm 2i \nu t} \to 0$, so our Hamiltonian looks like 
+\begin{align*}
+    \vb H_{RWA} = -\frac{\hbar}2\begin{pmatrix}
+        \delta & \Omega e^{-i\theta} \\ 
+        \Omega e^{i\theta} & -\delta
+    \end{pmatrix}
+\end{align*}
+
+If instead we used $B_{AC} = B_1(1, 0, 0)\cos(\nu t - \theta)$, we would arrive at 
+
+\begin{align*}
+     \dot a(t) &= i\frac{\omega}{2} a(t) + i\Omega \cos(\nu t - \theta)b(t)\\ 
+    \dot b(t) &= -i \frac{\omega}{2} b(t) + i \Omega \cos(\nu t - \theta)a(t)
+\end{align*}
+
+When we move to the rotating frame in the first equation, 
+\[\cos(\nu t - \theta) = \frac12(e^{-i\theta} e^{i \nu t} + e^{i \theta}e^{-i \nu t}) \to \frac12(e^{-i\theta} e^{i \nu t} + e^{i \theta}e^{-i \nu t}) e^{-i\nu t} = \frac12(e^{-i\theta} + e^{i\theta}e^{-2i\nu t})\]
+The RWA removes the latter term so that the same phase factor $e^{-i \theta}$ emerges. Similarly, we get the factor $e^{i\theta}$ in the bottom equation. 
+\end{proof}
+
+\begin{exc}{2j}
+    What happens if $\vb B_1 \parallel \vu z$
+\end{exc}
+\begin{ans}
+    THen our hamiltonian just looks like $\HH = -\gamma S_z (B_0 + B_1\cos\nu t)$ and we get zeeman splitting modulated by $B_1 \cos \nu t$.
+    \[E_{\pm} = \mp \gamma \frac{\hbar}2 (B_0 + B_1\cos\nu t)\]
+\end{ans}
+
+\newpage 
+\begin{exc}{3a}
+
+\end{exc}
+
+\begin{exc}{3b} 
+
+\end{exc}
+\begin{ans}
+\begin{enumerate}[(i)]
+    \item \[\hat U_{\pi_x/2} = \frac1{\sqrt 2}\begin{pmatrix}
+        1 & i \\ i & 1
+    \end{pmatrix}\]
+    We see that $\hat U_{\pi/2}$ takes $\ket 0 \to \frac1{\sqrt 2}({\ket 0 + i\ket{1}}) = \ket{0_y}$ and $\ket 1 \to \frac1{\sqrt 2}(i \ket 0 + \ket 1) = \ket{1_y}$. It rotates the bloch vector by $\pi/2$ counter clockwise around the $x$-axis.
+
+    \item \[\hat U_{\pi_x} = \frac1{\sqrt 2}\begin{pmatrix}
+        0 & i \\ i & 0
+    \end{pmatrix}\]
+    Rotates around $x$ axis by $\pi$, takes $\ket 0 \leftrightarrow \ket 1$ 
+\end{enumerate}
+\end{ans}
+
+\begin{exc}{3c}
+
+\end{exc}
+\begin{ans}
+    \begin{enumerate}[(i)]
+        \item \[\hat U_{\pi_y/2} = \frac1{\sqrt 2}\begin{pmatrix}
+        1 & 1 \\ -1 & 1
+    \end{pmatrix}\]
+    Takes $\ket 0 \to \ket{1_x}$ and $\ket 1 \to \ket{0_x}$. Rotates by $\pi/2$ ccw around $y$ axis
+    \item  \[\hat U_{\pi_y} = \frac1{\sqrt 2}\begin{pmatrix}
+        0 & 1 \\ -1 & 0
+    \end{pmatrix}\]
+    $\pi$ turn around $y$ axis. Flips $\ket 0 \leftrightarrow \ket 1$
+    \end{enumerate}
+\end{ans}
+
+\begin{exc}{3d}
+
+\end{exc}
+\begin{ans}
+%     $\Omega \gg \delta \implies \Omega_R \approx \Omega$.
+% \[\hat U_{HP} = \begin{pmatrix}
+%     \cos(\Omega t/2) & i e^{-i \theta}\sin(\Omega t/2)\\ 
+%     i e^{i \theta}\sin(\Omega t/2) & \cos(\Omega t /2)
+% \end{pmatrix}\]
+Then, 
+Note 
+\[\hat U(\Omega = 0,\delta,t) = \begin{pmatrix}
+    e^{i\delta t/2} & 0 \\ 
+    0 & e^{-i \delta t/2}
+\end{pmatrix}\]
+% \[\hat U_{HP, \pi_x/2} = \hat U(t, \delta = 0)\]
+\begin{align*}
+   \hat U_{Ramsey} &= \hat U_{\pi_x/2} \hat U(0, 0, t) \hat U_{\pi_x/2}\\ 
+   &= \frac1{\sqrt 2}\begin{pmatrix}
+        1 & i \\ i & 1
+    \end{pmatrix}\begin{pmatrix}
+       e^{i\delta t/2} & 0 \\
+        0 & e^{-i\delta t/2}
+    \end{pmatrix} \frac1{\sqrt 2}\begin{pmatrix}
+        1 & i \\ i & 1
+    \end{pmatrix}\\
+    &= \frac12 \begin{pmatrix}
+        1 & i \\ i & 1
+    \end{pmatrix} \begin{pmatrix}
+        e^{i\delta t/2} & i e^{i\delta t/2}\\
+        i e^{-i\delta t/2} & e^{-i\delta t/2}
+    \end{pmatrix}\\
+    &= \begin{pmatrix}
+       i \sin (\delta t/2) & i \cos(\delta t/2)\\ 
+       i \cos(\delta t/2) & -i\sin(i \delta t/2) 
+    \end{pmatrix}
+\end{align*}
+If state starts in $\ket 0 $, then after Ramsey Sequence $\ket 0 \to i \sin (\delta t/2)\ket 0 + i \cos(\delta t/2)\ket 1$ so there is probabliity $\cos^2(\delta t/2)$ that it is in $\ket 1$.
+
+If we apply a $pi_y/2$ resonance pulse last instead, we get 
+\begin{align*}
+\hat U &= \hat U_{\pi_y/2} \hat U(0, 0, t) \hat U_{\pi_x/2}\\ 
+   &= \frac1{\sqrt 2}\begin{pmatrix}
+        1 & 1 \\ -1 & 1
+    \end{pmatrix}\begin{pmatrix}
+       e^{i\delta t/2} & 0 \\
+        0 & e^{-i\delta t/2}
+    \end{pmatrix} \frac1{\sqrt 2}\begin{pmatrix}
+        1 & i \\ i & 1
+    \end{pmatrix}\\
+    &= \frac12 \begin{pmatrix}
+        1 & 1 \\ -1 & 1
+    \end{pmatrix} \begin{pmatrix}
+        e^{i\delta t/2} & i e^{i\delta t/2}\\
+        i e^{-i\delta t/2} & e^{-i\delta t/2}
+    \end{pmatrix}
+\end{align*}
+The relevant matrix element for the transitiona amplitude $\ket 0 \to \ket 1$ is the lower left, which is given by 
+\[\frac12(-e^{i\delta t/2} + ie^{-i\delta t/2})\]
+The probability is then 
+\begin{align*}
+    P &= |\frac12(-\cos(\delta t/2) - i\sin(\delta t/2) + i\cos(\delta t/2) + \sin(\delta t/2))|^2\\
+    &= \frac14((\sin \delta t/2 - \cos(\delta t/2))^2 + (\sin \delta t/2 - \cos \delta t/2)^2)\\
+    &= \frac12(1 - 2\sin(\delta t/2)\cos(\delta t/2))\\
+    &= \frac12(1 - \sin(\delta t))
+\end{align*}
+\end{ans}
+\end{document}

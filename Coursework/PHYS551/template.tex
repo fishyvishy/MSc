@@ -1,0 +1,208 @@
+%packages
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage[utf8]{inputenc}
+% \usepackage[spaced=0]{diffcoeff}
+\usepackage[italic=true]{derivative}
+\usepackage{tcolorbox}
+\usepackage{physics2}
+\usephysicsmodule{ab, braket}
+\usepackage{siunitx}
+\usepackage{fancyhdr}
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz}
+\usepackage{pgfplots} % for the axis environment
+% \usepackage{fullpage}
+
+%environments
+\newtheorem*{question}{Q}
+\newtheorem*{prop}{Proposition}
+
+\newenvironment{quest}[1]
+{\vspace{0.3cm}\noindent\textbf{Q(#1)}\em}{\vspace{0.3cm}}
+
+\newenvironment*{Remark}{\noindent\textbf{Remarks}\begin{enumerate}}{\end{enumerate}\vspace{1em}\noindent}
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+
+
+%commands
+\newcommand{\e}{\varepsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+
+
+\newcommand{\grad}{\vec \nabla}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\vphi}{\varphi}
+\newcommand{\p}{\partial}
+
+
+
+\newcommand{\eq}{\Leftrightarrow}
+\newcommand{\clm}{\textbf{Claim }}
+\newcommand{\rmks}{\noindent\textbf{Remarks}}
+\newcommand{\levi}{\mathfrak{E}}
+\newcommand{\tr}{\mathrm{tr}}
+
+
+\makeatletter
+     \newcommand\vb{\@ifstar\boldsymbol\mathbf}
+     \newcommand\va[1]{\@ifstar{\vec{#1}}{\vec{\mathrm{#1}}}}
+     \newcommand\vu[1]{%
+       \@ifstar{\hat{{#1}}}{\hat{{#1}}}}
+    % \renewcommand*{\vec}[][default]{def}
+\makeatother
+
+
+\newcommand{\ev}[1]{\langle{#1}\rangle}
+\newcommand{\vecp}[1]{\vec{#1}\:'}
+%\renewcommand\qedsymbol{QED}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Set up header/footer
+\pagestyle{fancy}
+\fancyhead[LO,L]{Vishwanath Wimalasena}
+\setlength{\headheight}{14.5pt}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0.5pt}
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\tcbuselibrary{theorems}
+\tcbuselibrary{breakable}
+\tcbuselibrary{skins}
+
+%environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{lem}{Lemma}
+\newtheorem*{ex}{Exercise}
+
+\theoremstyle{definition}
+\newtheorem*{sol}{Sol}
+
+\newtcbtheorem[number within=section]{cthm}{Theorem}%
+{colback=green!8!white, colframe=green!40!black,fonttitle=\bfseries, fontupper=\itshape}{mainthm}
+
+\newtcbtheorem[number within=section]{cexercise}{Exercise}%
+{colback=green!8!white, colframe=green!40!black,fonttitle=\bfseries, fontupper=\itshape}{mainthm}
+
+\newtcbtheorem[number within=section]{cclaim}{Claim}%
+{colback=green!8!white,colframe=green!40!black,fonttitle=\bfseries, fontupper=\itshape}{claim}
+
+\tcolorboxenvironment{sol}{breakable, enhanced, left=5mm,
+    before skip=10pt, after skip=10pt, frame  hidden,colback=green!6!white,
+    borderline west={1pt}{0pt}{green!60!black}}
+
+\tcolorboxenvironment{lem}{
+    enhanced jigsaw,colback=green!8!white, colframe=green!40!black,breakable,before skip=10pt,after skip=10pt }
+
+\tcolorboxenvironment{proof}{% `proof' from `amsthm' 
+    blanker,breakable,left=5mm,
+    before skip=10pt,after skip=10pt,
+    borderline west={1pt}{0pt}{green!60!black}}
+
+% \newtcolorbox{ansbox}{tcbox raise base, leftrule=0pt, arc=0pt, rightrule=0pt,toprule=0mm,bottomrule=0mm, colback=green!8!white, colframe=green!20!black}
+
+% \newtcolorbox{background}[1][]{enhanced,
+%     colback=green!5!white,colframe=green!40!black,
+%     colbacktitle=green!40!black,fonttitle=\bfseries,
+%     frame hidden,
+%     title=Background,
+%     boxrule=0pt,
+%     titlerule style=green!70!black, #1}
+
+\tcolorboxenvironment{ex}{enhanced jigsaw, colback=green!8!white, colframe=green!40!black,breakable,before skip=10pt,after skip=10pt}
+
+\tcolorboxenvironment{question}{% `proof' from `amsthm' 
+    blanker,colback=green,breakable,left=5mm,
+    before skip=10pt,after skip=10pt,
+    borderline west={1mm}{0pt}{green!40!black}}
+
+% \tcbset{one-sided-color/.style={
+%         breakable,
+%         enhanced,
+%         boxrule=0pt,
+%         frame hidden,
+%         borderline ={1pt}{0pt}{#1},
+%         colback=#1!10,
+%         coltitle=#1!200,
+%         after title={\ },
+%         attach title  to upper,
+%     }
+% }
+
+\newtcolorbox{q}{one-sided-color=green!60!black, title=\textbf{Q}}
+
+\newtcolorbox{outline}[1]{one-sided-color=blue!70!black, title=\textbf{#1}}
+
+% \newtcolorbox{ans}{breakable,
+%         enhanced,
+%         boxrule=0pt,
+%         frame hidden,
+%         borderline west={1pt}{0pt}{green!70!black},
+%         % borderline south={1pt}{0pt}{green!70!black},
+%         % after title={\ },
+%         % attach title  to upper,
+%         top=1pt,
+%         % boxsep=1pt,
+%         colback=white,
+%         coltitle=green!70!black!200}
+
+
+% \newtcolorbox{q2}{breakable,
+%         enhanced,
+%         boxrule=0pt,
+%         frame hidden,
+%         borderline west={1pt}{0pt}{green!70!black},
+%         colback=green!70!black!10, after title={Q}}
+
+% \newtcolorbox{exc}[1]{one-sided-color=green!70!black, title=\textbf{(#1)}}
+
+\definecolor{bordercolor}{rgb}{0.06,0.43,0.02}
+\definecolor{boxcolor}{rgb}{0.33,0.77,0.33}
+
+\newtcolorbox{exc}[1]{
+        breakable,
+        enhanced,
+        frame hidden,
+        borderline ={1pt}{0pt}{bordercolor},
+        colback=boxcolor!10,
+        coltitle=bordercolor,
+        after title={\ },
+        attach title  to upper,
+        title=\textbf{Exercise #1},
+        }
+
+\newtcolorbox{ans}{
+    breakable,
+    enhanced,
+    boxrule=0pt,
+    frame hidden,
+    borderline west={1pt}{0pt}{green!70!black},
+    top=1pt,
+    colback=white,
+    coltitle=bordercolor,
+    }
+% \newcommand{\exc}[1]{\begin{exc}#1\end{exc}}

@@ -1,0 +1,547 @@
+\documentclass[12pt]{article}
+\input{../template.tex}
+
+\fancyhead[CO,C]{\textbf{PSET 1}}
+\fancyhead[RO,R]{PHYS551}
+
+
+\begin{document}
+\begin{exc}{1}
+A given Hilbert space is spanned by $n$-kets $\ket{\alpha_i}$ with $i = 1,\ldots, n$. In this space I define operators $S_i$ that act on the basis vectors in the following way:
+\begin{equation}
+    S_i\ket{\alpha_j} = [c_j\ket{\alpha_i} + c_i\ket{\alpha_j}]|\e_{ij}| + \delta_{ij}\ket{\alpha_j}
+\end{equation}
+where $\e_{ij}$ is an antisymmetric tensor satisfying $\e_{ij} = -\e_{ji} - 1$, $\e_{ij}$ denote the absolute value, $\delta_{ij}$ is the Kronecker delta function and $c_i$ are some non-zero
+real constants that satisfy the constraint:
+\begin{equation}
+    \sum_{i=1}^n c_i = -(n-1). \quad (0.2)
+\end{equation}
+Determine the matrix representation of an operator $S_k$ where $1 \leq k \leq n$.
+\end{exc}
+\begin{ans}
+The matrix element $(S_i)_{mj}$ is given by:
+\begin{align*}
+    \bra{\alpha_m }S_i \ket{\alpha_j}
+    &= (c_j \delta_{mi} + c_i \delta_{mj})|\e_{ij}| + \delta_{ij}\delta_{mj} 
+\end{align*}
+We consider the case $i =j$. Then, the antisymmetric metric tensor $\e_{ii} = -e_{ii} = 0$ and $\delta_{ii = 1}$ so we get 
+\[ \bra{\alpha_m }S_i\ket{\alpha_j} = \delta_{ij}\delta_{mj}\]
+If $i \neq j$, then $\delta_{ij} = 0$ and $|\e_{ij}| = 1$, so 
+\[\bra{\alpha_m }S_i\ket{\alpha_j} = (c_j \delta_{mi} + c_i \delta_{mj})\]
+
+Let's consider the diagonal elements $(S_i)_{mm}$. If $i = m$, then we look at the first case and see that $(S_i)_{ii} = 1$. Else, we see that $(S_i)_{mm} = (c_m\delta_{mi} + c_i \delta_{mm})|\e_{im}| = c_i$. Any off diagonal terms occur at $m \neq j$ so that $\delta_{ij}\delta_{mj} = 0$. Hence, we look at the second case and see that $(S_i)_{mj} = c_j \delta_{mi}$. So off diagonal terms occur along row $m = i$ with value $c_j$ as indexed by the column. Hence, 
+\begin{align*}
+    S_1 = \begin{pmatrix}
+        1 & c_2 & c_3 & \ldots & c_n \\
+        0 & c_1 & 0 & \ldots & 0 \\ 
+        0 & 0 & c_1 & \ldots & 0\\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \ldots & c_1  
+    \end{pmatrix}
+    S_i = \begin{pmatrix}
+        0 & 0 & 0 & \ldots & 0 \\
+        0 & \ddots & 0 & \ldots & 0 \\ 
+        c_1 & c_2\ldots c_{i - 1} & 1 & c_{i + 1}\ldots & c_n\\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \ldots & c_i  
+    \end{pmatrix}
+\end{align*}
+
+Some $c_j$ has to be non-zero by the constraint condition. We then see that $(S_i)_{ij} = c_j$ but $(S_i)_{ji} = 0 \neq c_j^\dagger$ for $i \neq j$. Thus, $S_i$ is \textbf{not Hermitian} for any $i$. The trace of $S_i$ is the sum of the diagonal entries, which gives $(n - 1)c_i + 1$. Hence, $\tr(S_i) = (n - 1)c_i + 1$. Then, 
+\[\tr(S) = \sum_{i = 1}^n\tr(S_i) = (n - 1)\sum_{i = 1}^nc_i + n = -n + n = 0\]
+We also note that $S$ is \textbf{not Hermitian} since $S_{k1} = c_1$ but $S_{1k} = c_k$.
+\end{ans}
+
+\newpage 
+\begin{exc}{2a}
+In a Stern-Gerlach experiment I send a beam of silver atoms through a
+magnetic field that is pointing strictly along the $z$-direction i.e ignoring
+the $\nabla \cdot \vec B = 0$ constraint. The beam would naturally split into $\pm z$
+directions. Now if I want to measure $J_x$ component of the spin, do I
+detect any non-zero result? Give reason for your answer.
+\end{exc}
+\begin{ans}
+    Yes. The two beams correspond to the $\ket{\pm z}$ eigenstates which can collapse into the $\ket{\pm x}$ with equal probability when $J_x$ is measured.
+\end{ans}
+
+\begin{exc}{2b}
+Imagine due to some reason the Planck's constant $\hbar$ doubles it value i.e
+$\hbar_{new} = 2\hbar$ This would mean, in terms of the original $\hbar$, all particles
+would effectively behave as integer spin particles. What would you
+expect to see in a Stern-Gerlach experiment if I now send silver atoms
+through magnetic field oriented along $z$ direction? Give reason for your
+answer.
+\end{exc}
+\begin{ans}
+    The electron now behaves as a spin-1 particle so that eigenstates of $S_z$ are available. These will quantize the magnetic dipole moment $\mu \in [-1, 0, 1]\hbar$ so that 3 peaks will be seen on the screen. One corresponding to 0 deflection due to the $m_s = 0$ eigenstate and two peaks symmetric about the 0 deflection line corresponding to $m_s = \pm \hbar$.
+\end{ans}
+
+\begin{exc}{2c}
+    I construct a Stern-Gerlach type experiment but with the following
+    changes: (i) I replace the silver atoms by electrons, and I replace the
+    magnetic field by a strong electric field, (ii) I replace the silver atoms
+    by electrons, but I keep the magnetic field the same, (iii) I keep the
+    silver atoms, but I replace the magnetic field by a strong electric field,
+    and (iv) I keep the silver atoms, but I make the magnetic field constant
+    along $z$-direction. Do I expect to see any effects on the screen? Give
+    only qualitative answers to the questions
+\end{exc}
+\begin{ans}
+\begin{enumerate}[(i)]
+    \item The magnetic dipole moment does not interact with the electric field so the spin does not contribute. However, the electrons experience a force in the opposite direction to the electric field due to the coulomb force. So one peak emerges on the screen due to this force, which is the same for each electron.
+    \item The same deflection pattern is observed as in the original experiment as the electrons have the same magnetic moment due to intrinsic spin.
+    \item The magnetic moment does not interact with the electric field and since the silver atoms are electrically neutral, no deflection is seen at all.
+    \item No deflection is seen as the force on the atom is given by $F_z = -\partial_z(\vec \mu \cdot \vec B) = \mu \pdif{B_z}{z}$, so if $B$ is constant in the $z$ direction, the force goes to 0.
+\end{enumerate}
+\end{ans}
+
+\begin{exc}{2d}
+An electron is known to have zero size, i.e it is exactly point like. Imagine somebody tells you that an electron is not quite point like but it is
+more like a small ring of thickness $\delta$ and inner radius $r$, where $(r, \delta) \to 0$ of course. Would you be able to refute or agree with his statement using only Stern-Gerlach experiment with silver atoms? Give qualitative
+reasonings. Assume that the nucleus remains as before and only the
+electrons change in the aforementioned way.
+\end{exc}
+\begin{ans}
+    You would expect each electron to have a classical angular momentum being a spinning ring. The results of the stern-gerlach experiment would necessitate that this angular momentum was quantized. This would imply that each electron ring spins at the same speed and the quantization is due to it spinning in one direction or another.
+\end{ans}
+
+
+\newpage
+\begin{exc}{3a}
+If an operator $A$ commutes with both $J_+$ and $J_-$, show that it also
+commutes with $J_z$, i.e $[A, J_z] = 0$. Here $J_{\pm}$ are the raising-lowering
+operators. Does $A$ commutes with $J^2$, the total angular momentum?
+\end{exc}
+\begin{ans}
+    Note that 
+    \[J_+J_- = (J_x + iJ_y)(J_x - iJ_y) = J_x^2 -i[J_x, J_y] + J_y^2 = J_x^2 + J_y^2 + \hbar J_z\]
+    Hence, 
+    \[J_z = \frac1\hbar(J_+J_- - J_x^2 - J_y^2)\]
+    $A$ necessarily commutes with $J_x$ and $J_y$ since these operators are formed from linear combinations of $J_\pm$. Thus, $A$ commutes with $J_z$ since it commutes with $J_\pm$ and $J_x, J_y$. 
+
+    
+    Since $A$ commutes with each of $J_x, J_y, J_z$, it commutes with $J^2$.
+\end{ans}
+
+\begin{exc}{3c}
+In a certain $n$-dimensional Hilbert space I have a traceless operator
+$A$ that has only two distinct eigenvalues each with certain number of
+degeneracies. Show that this information can at least specify one of the
+eigenvalue, say $\lambda$, in terms of $\det A$ as $\lambda \propto (\det A)^{1/n}$
+\end{exc}
+\begin{proof}
+    Let $A$ have eigenvalues $\lambda$ and $\kappa$. If $\lambda$ has degeneracy $p$, then $\kappa$ necessarily has degeneracy $n - p$. The traceless condition gives us that 
+    \[p\lambda + (n - p)\kappa = 0 \implies \kappa = \frac{p}{p - n}\lambda\]
+    The determinant of $A$ is given by the product of eigenvalues (with multiplicity) so that 
+    \[\det A = \lambda^p \kappa^{n - p} = \lambda^p \ab(\frac{p}{p - n}\lambda)^{n - p} = \lambda^n \ab(\frac{p}{p - n})^{n - p}\]
+    Thus, 
+    \[\lambda = \ab(\frac{p}{p - n})^{(n - p)/n}(\det A)^{1/n} \propto (\det A)^{1/n}\]
+    as required.
+\end{proof}
+
+\begin{exc}{3d}
+In a certain $n$-dimensional Hilbert space, an operator $A$ has $n $eigenvalues
+$\lambda_i$ with $i = 1,\ldots, n$ such that $\lambda_i \leq \lambda_{i + 1}$. Argue that in this space expectation value of $A$ in any generic state $\ket \psi$ satisfy $\lambda_1 \leq \braket[3]{\psi}{A}{\psi}$ assuming the normalisability condition $\braket{\psi}{\psi} = 1$.
+\end{exc}
+\begin{ans}
+Let $\ket i$ be the normalized eigenstate corresponding to eigenvalue $\lambda_i$ so that $\{\ket i\}_{i = 1, \ldots, n}$ is an orthonormal basis. Expand $\ket \psi = \sum_{m} c_n \ket{m}$. Then, 
+\begin{align*}
+    \braket[3]{\psi}{A}{\psi} 
+    = \sum_{m,k}\bra m c_m^* A c_k \ket k
+    = \sum_{m,k} c_m^* c_k\lambda_k \braket m k
+    = \sum_{m} \lambda_{m} |c_m|^2 
+\end{align*}
+Normalization of $\psi$ dictates that $\sum_m|c_m|^2 = 1$. We then see that 
+\begin{align*}
+    \braket[3]{\psi}{A}{\psi} &\geq \sum_{m} \lambda_1 |c_m|^2 = \lambda_1 \sum_m |c_m|^2 = \lambda_1\\
+     \braket[3]{\psi}{A}{\psi} &\leq \sum_{m} \lambda_n |c_m|^2 = \lambda_n \sum_m |c_m|^2 = \lambda_n
+\end{align*}
+where the inequalities hold because $\lambda_1 \leq \lambda_i \leq \lambda_n$ by assumption.
+\end{ans}
+
+\newpage 
+\begin{exc}{4}
+    Using the commutator relation $[J_x, J_y] = i\hbar J_z$ and cyclic permutations between them, show that:
+    \[J_-\ket{j,m} = \hbar \sqrt{j(j + 1) - m(m - 1)}\ket{j, m -1}\]
+    where $j$ is the highest eigenvalue of $J^2$ in a given Hilbert space and $J_-$ is the lowering operator. For a spin $1/2$ particle with spin pointing along $z$ direction, why isn't the total angular momentum $J^2$ simply given by $\hbar^2/4$?
+\end{exc}
+\begin{proof}
+    First we show that $J_-\ket{j, m}$ is an eigenstate of $J_z$. Observe that 
+    \begin{align*}
+    [J_z, J_-] &= J_z(J_x-iJ_y) - (J_x - iJ_y)J_z \\
+    &= [J_z, J_x] + i[J_y, J_z] \\
+    &= i\hbar J_y -\hbar J_x = -\hbar J_-
+    \end{align*}
+    Now we see that 
+    \begin{align*}
+        J_z(J_-\ket{j, m}) &= ([J_z, J_-] + J_- J_z)\ket{j, m}\\
+        &= -\hbar J_- \ket{j, m} + m\hbar J_-\ket{j, m}\\
+        &= (m - 1)\hbar J_-\ket{j, m}
+    \end{align*}
+    so that $J_-\ket{j, m}$ is an eigenstate of $J_z$ with eigenvalue $(m - 1)\hbar$. We claim that $J_-\ket{j, m} = \alpha \ket{j, m - 1}$. We know that there can be no contributions from eigenkets with other $m$ values as they produce orthogonal eigenstates. Further, $[J_-, J^2] = [J_x - iJ_y, J_z] = 0$ as each $J_i$ commmutes with $J^2$. Thus, $J_-\ket{j, m} \neq \alpha\ket{j', m - 1}$ as this does not commute with $J^2$. Now we see that 
+    \begin{align*}
+        \alpha^2 &= \bra{j, m}J_-^\dagger J_-\ket{j,m}\\
+        &= \bra{j, m}((J_x + iJ_y)(J_x - iJ_y))\ket{j,m}\\
+        &= \braket[3]{j, m}{J_x^2 + J_y^2 - i[J_x, J_y]}{j, m}\\ 
+        &= \braket[3]{j, m}{J^2 - J_z^2 + \hbar J_z}{j, m}\\
+        &= j(j + 1)\hbar^2 - m^2\hbar^2 + m\hbar^2\\
+        &= \hbar^2 [j(j + 1)-m(m - 1)]
+    \end{align*}
+    Thus, 
+    \[\alpha = \hbar \sqrt{j(j + 1) - m(m - 1)}\]
+    as required.
+
+
+    The total angular momentum of a spin 1/2 system $(j = 1/2)$ prepared in the $m = 1/2$ state is $J^2\ket{1/2, 1/2} = 1/2(1/2 + 1)\hbar^2 = 3\hbar^2/4$. This is because the state can still have $S_x$ and $S_y$ components as $S_{x/y} {j, m} \neq 0$. 
+\end{proof}
+
+
+\newpage 
+\begin{exc}{5a}
+In a two-dimensional Hilbert space spanned by eigenstates of $J_z$ an
+electron is in $\ev{+z}$ state. With what uncertainities can I measure $J_x$
+and $J_y$ angular momenta? Determine the lower bound satisfied by the
+product of these uncertainities. Do not derive the relation.
+\end{exc}
+\begin{ans}
+    We have that 
+    \begin{align*}
+        \ev{J_x} &= \braket[3]{+z}{J_x}{+z} = \frac{\hbar}2\bra{+z} \ket{-z} = 0\\ 
+        \ev{J_x^2} &= \braket[3]{+z}{J_x}{+z} =  \frac{\hbar}2\braket[3]{+z}{J_x}{-z} = \frac{\hbar^2}{4} 
+    \end{align*}
+    Thus, the uncertainty with which you can measure $J_x$ is 
+    \[\Delta J_x = \sqrt{\ev{J_x^2} -\ev{J_x}^2} = \frac \hbar 2\]
+    Similarly, 
+        \begin{align*}
+        \ev{J_y} &= \braket[3]{+z}{J_y}{+z} = \frac{i\hbar}2\bra{+z} \ket{-z} = 0\\ 
+        \ev{J_y^2} &= \braket[3]{+z}{J_y}{+z} =  i\frac{\hbar}2\braket[3]{+z}{J_y}{-z} = -i^2\frac{\hbar^2}{4} = \frac{\hbar^2}{4} 
+    \end{align*}
+    So 
+    \[\Delta J_y = \sqrt{\ev{J_y^2} -\ev{J_y}^2} = \frac \hbar 2\]
+
+    The uncertainty relation gives us a lower bound on the product of these uncertainties: 
+    \begin{align*}
+        \Delta J_x \Delta J_y &\geq \frac 12 |\ev{J_x, J_y}| = \frac12 |i\hbar \ev{J_z}| = \frac 12 |i \hbar \frac\hbar 2| = \frac{\hbar^2}{4}
+    \end{align*}
+\end{ans}
+
+\begin{exc}{5b}
+    The raising (or lowering) operator satisfy the commutator relation $[J_z,J_+] =
+\hbar J_z$ with $J_z$. Using this can we say that the product of the uncertaini-
+ties in measuring $J_z$ and $J_+$ has a lower bound of $\frac \hbar 2 |\ev{J_+}|$? Would there be any apparent contradiction with known results?
+\end{exc}
+\begin{ans}
+No we cannot conclude that lower bound because $J_+$ is not hermitian and the proof of the bound requires hermiticity. This is also clearly violated for the state $\ket{+z}$ which is an eigenstate of $J_z$ and $J_+$ with eigenvalues $\hbar 2$ and $0$ respectively. In this case, $\Delta J_z = \Delta J_+ = 0$.
+\end{ans}
+
+\begin{exc}{5c}
+An operator $A$ commutes with another operator $C$ in a given Hilbert
+space. This means that we can measure them simultaneously and if
+the basis of the Hilbert space are eigenstates of $C$, then there are no
+uncertainities in the measurements of $A$ and $C$. However the operator
+could also be thought of as being made of operators $A_i$ such that
+\begin{equation}
+    A = \sum_{i = 1}^n A_i
+\end{equation}
+where $n$ is some integer. Will there be uncertainities in $C$ and $A_i$ now?
+Give an example to justify your result.
+\end{exc}
+\begin{ans}
+    There can be. Consider $J^2 = J_x^2 + J_y^2 + J_z^2$. $J^2$ commutes with $J_z$, but $J_z$ does not commute with $J_x^2$ or $J_y^2$ so there can be uncertainties in these measurements.
+\end{ans}
+
+\begin{exc}{5d}
+Two operators $A$ and $B$ anti-commute to a third operator $C$ in a given
+Hilbert space:
+\begin{equation}
+    \{A, B\} = AB + BA = C
+\end{equation}
+In this space however there are uncertainities in the measurement of
+both $A$ and $B$ with the following lower bound: $\Delta A \Delta B \geq 3\hbar$. With
+these informations, can you determine the operator $C$?
+\end{exc}
+\begin{ans}
+I don't think so.
+\end{ans}
+
+\newpage 
+\begin{exc}{6a}
+In a given $n$-dimensional Hilbert space a Hermitian operator $A$ has $n$
+non-degenerate eigenvalues $\lambda_k$ where $k = 1,\ldots n$. Show that a generic
+operator like $A$ can alternatively be written as:
+\[A = \sum_{k = 1}^n \lambda_k \ketbra{\psi_k}{\psi_k}\]
+where $\ket{\psi_k}$ form the basis vectors of the Hilbert space with $k = 1,\ldots, n$ as before.
+\end{exc}
+\begin{ans}
+    The orthonormality of the basis gives 
+    \[\sum_{k = 1}^n \ketbra{\psi_k}{\psi_k} = 1\]
+    Thus, 
+    \[A = A\sum_{k = 1}^n \ketbra{\psi_k}{\psi_k} = \sum_{k = 1}^n A\ketbra{\psi_k}{\psi_k} = \sum_{k = 1}^n \lambda_k\ketbra{\psi_k}{\psi_k}\]
+    as desired.
+\end{ans}
+
+
+
+\begin{exc}{6b}
+In a two-dimensional Hilbert space an operator has two eigenstates
+given by
+\begin{equation}
+    \ket{\psi_1} = \begin{pmatrix}
+        a_1\\b_1 
+    \end{pmatrix},\qquad \ket{\psi_2} = \begin{pmatrix}
+        a_2 \\ b_2
+    \end{pmatrix}
+\end{equation}
+    corresponding to the two eigenvalues $\lambda_1$ and $\lambda_2$ respectively with $\lambda_1 \neq \lambda_2$. Using this information only, determine the matrix representation of the operator $A$. Assume that the $(a_i, b_i,\lambda_i)$ with $i = 1,2$ are given integers.
+\end{exc}
+\begin{ans}
+    Let $A_\psi$ denote the operator $A$ represented in the basis $\{\ket{\psi_1}, \ket{\psi_2}\}$ and $A_0$ the operator represented in the given basis. We know that $A_\psi$ is diagonal with entries $\lambda_i$. Note that 
+    \[P = \begin{pmatrix}
+        \uparrow & \uparrow \\ 
+        \ket{\psi_1} & \ket{\psi_2} \\ 
+        \downarrow & \downarrow
+    \end{pmatrix} 
+    = \begin{pmatrix}
+        a_1 & a_2 \\ 
+        b_1 & b_2
+    \end{pmatrix}\]
+    is the change of basis matrix between the basis $\ket{\psi_i}$ basis and the given one. Thus, 
+    \begin{align*}
+        A_0 &= PA_\psi P^{-1}\\ 
+        &= \begin{pmatrix}
+        a_1 & a_2 \\ 
+        b_1 & b_2
+    \end{pmatrix}\begin{pmatrix}
+        \lambda_1 & 0 \\ 
+        0 & \lambda_2
+    \end{pmatrix}\frac1{a_1b_2 - a_2b_1}\begin{pmatrix}
+        b_2 & -a_2 \\ 
+        -b_1 & a_1
+    \end{pmatrix} \\
+    &= \frac1{a_1b_2 - a_2b_1}\begin{pmatrix}
+        a_1 & a_2 \\ 
+        b_1 & b_2
+    \end{pmatrix}\begin{pmatrix}
+        \lambda_1 b_2 & -\lambda_1 a_2 \\ 
+        -\lambda_2 b_1 & \lambda_2a_1
+    \end{pmatrix}\\
+    &= \frac1{a_1b_2 - a_2b_1}\begin{pmatrix}
+        a_1b_2\lambda_1 - a_2b_1\lambda_2  & -a_1a_2\lambda_1 + a_1a_2\lambda_2 \\ 
+        b_1b_2\lambda_1 - b_1b_2\lambda_2 & -b_1a_2\lambda_1 + a_1b_2\lambda_2
+    \end{pmatrix}\\
+    &= \frac1{a_1b_2 - a_2b_1}\begin{pmatrix}
+        a_1b_2\lambda_1 - a_2b_1\lambda_2 & -a_1a_2(\lambda_1 - \lambda_2)\\
+        b_1b_2(\lambda_1 - \lambda_2) & -a_2b_1 \lambda + a_1b_2\lambda_2
+    \end{pmatrix}
+    \end{align*}
+\end{ans}
+
+
+
+
+\begin{exc}{6c}
+    Show that if two operators $A$ and $B$ commute and $\ket{\psi_1}$ is an eigenstate
+of $A$ with an eigenvalue $\lambda$, then the state $\ket{\psi_2} = B\ket{\psi_1}$ is also an eigenstate of $A$ with the same eigenvalue. On the other hand show that
+if there exists a basis of eigenvectors common to both the operators $A$
+and $B$ then these two operators must commute.
+\end{exc}
+\begin{proof}
+    If $A$ and $B$ commute, then $AB = BA$ and we see that 
+    \[A\ket{\psi_2} = AB \ket{\psi_1} = BA \ket{\psi_1} = \lambda B \ket{\psi_1} = \lambda \ket{\psi_2}\]
+    So $\ket{\psi_2}$ is eigenstate of $A$ with same eigenvalue.
+
+    Let $\{\ket{m_i}\}$ be a basis of eigenstates with eigenvalues $a_i$ and $b_i$ for $A$ and $B$ respectively. First note that for an arbitrary basis vector $\ket{m_i}$, we have 
+    \[AB \ket{m_i} = b_i A\ket{m_i} = a_i b_i \ket{m_i} = BA\ket{m_i}\]
+    Then, for an arbitrary ket $\ket \psi = \sum_i c_i \ket{m_i}$, we have 
+    \[AB \ket\psi = \sum_i c_i AB \ket{m_i} = \sum_i c_i BA \ket{m_i} = BA \ket{\psi}\]
+    So $A$ and $B$ commute.
+\end{proof}
+\begin{exc}{6d}
+    I define the so called parity operator $\Pi$ satisfying the standard operator
+equation
+\begin{equation}
+    \Pi\ket{x} = \ket{-x}
+\end{equation}
+where $x$ is the coordinate along $x$-direction. Using this defination de-
+termine the action of the following
+\begin{equation}
+    \sin\ab[\alpha\ab(\frac{1 + \Pi}{2})]\ket{x}
+\end{equation}
+where $\alpha$ is a positive integer. Observe that for our case there is no
+constraint on $\alpha$.
+\end{exc}
+\begin{ans}
+    Note that $(1 + \Pi)\ket{x} = \ket{x} + \ket{-x}$ and $(1 + \Pi)(\ket x + \ket{-x}) = \ket x + \ket{-x} + \ket{-x} + \ket{x}= 2(\ket x + \ket{-x})$. Thus, it follows that 
+    \[(1 + \Pi)^n\ket{x} = 2^{n - 1}(\ket{x} + \ket{-x}), \qquad n \geq 1\]
+    Not worrying about convergence for now, we take the $\sin$ of the operator to be 
+    \begin{align*}
+         \sin\ab[\alpha\ab(\frac{1 + \Pi}{2})]\ket{x} 
+         &= \sum_{n = 1}^\infty (-1)^{n -1}\frac{\alpha^{2n - 1}(1 + \Pi)^{2n - 1}}{2^{2n - 1} n!}\ket{x} \\ 
+         &= \sum_{n = 1}^\infty (-1)^{n -1}\frac{\alpha^{2n - 1}}{2^{2n - 1} n!}2^{2n - 2}(\ket x + \ket{-x}) \\
+         &= \ab(\sum_{n = 1}^\infty (-1)^{n -1}\frac{\alpha^{2n - 1}}{n!})\frac 12 (\ket x + \ket{-x}) \\ 
+         &= \frac12\sin(\alpha)(\ket x + \ket{-x})
+    \end{align*}
+\end{ans}
+
+\newpage 
+\begin{exc}{7}
+    A two dimensional Hilbert space is spanned by states: $\ket{\phi_1}$ and $\ket{\phi_2}$ that are eigenvectors of an operator $H_0$ with eigenvalues $E_1$ and $E_2$ Imagine that I add a small shift to the operator $H_0$ via a matrix $W$:
+    \begin{equation}
+        W = \begin{pmatrix}
+        W_{11} & W_{12} \\ 
+        W_{12}^* & W_{22}
+    \end{pmatrix}
+    \end{equation}
+    with $W_{11}$ and $W_{22}$ real, such that the shifted operator is $H = H_0 + W$.
+    Clearly for this shift, the states $\ket{\phi_1}$ and $\ket{\phi_2}$ are no longer eigenstates of the new operator $H$. Let us denote the new eigenstates by $\ket{\psi\pm}$. Determine these new eigenstates and the new eigenvalues of $H$. Show that you can always express these states as:
+    \begin{equation}
+        \begin{pmatrix}
+            \ket{\psi_+} \\
+            \ket{\psi_-}
+        \end{pmatrix}
+        = 
+        \begin{pmatrix}
+            \cos \frac\theta 2 e^{-i\varphi/2} & \sin \frac\theta 2e^{i\varphi/2}\\
+            -\sin \frac \theta 2 e^{-i\varphi/2} & \cos\frac \theta 2 e^{i\varphi/2}
+        \end{pmatrix}
+        \begin{pmatrix}
+            \ket{\phi_1}\\
+            \ket{\phi_2}
+        \end{pmatrix}
+    \end{equation}
+    where the angles $\theta$ $(0 \leq \theta \leq \pi)$ and $\varphi$ are defined as:
+    \begin{equation}
+        \tan \theta = \frac{2|W_{12}|}{E_1 + W_{11} - E_2 - W_{22}}, \qquad e^{i\varphi} = \frac{W_{21}}{|W_{21}|}
+    \end{equation}
+\end{exc}
+\begin{ans}
+    We are looking at the matrix 
+    \[H = \begin{pmatrix}
+        E_1 + W_{11} & W_{12} \\ 
+        W_{12}^* & E_2 + W_{22}
+    \end{pmatrix}\]
+    Let $\alpha = E_1 + W_{11} - E_2 - W_{22}$. Mathematica yields eigenvalues 
+    \begin{align*}
+        E_{\pm} = \frac12(E_1 + W_{11} + E_2 + W_{22} \pm \sqrt{\alpha^2 + 4|W_{21}|^2})
+    \end{align*}
+    and eigenvectors
+    \begin{align*}
+        \ket{\psi_\pm} &= (\alpha \mp \sqrt{\alpha^2 + 4|W_{21}|^2}, 2W_{21})\\ 
+    \end{align*}
+    Letting $\sim$ denote equal up to a multiplicative factor, we find 
+    \begin{align*}
+        \ket{\psi_-}&\sim \ab(1 - \sqrt{1 + \frac{4|W_{21}|^2}{\alpha^2}}, \frac{2W_{21}}{\alpha})\\
+        & \sim (1 - \sqrt{1 + \tan^2\theta}, \tan \theta e^{i\varphi})\\ 
+        & \sim (\cos \theta - 1, \sin \theta e^{i\varphi})
+    \end{align*}
+    Now we normalize by dividing by $|(\cos \theta - 1, \sin \theta e^{i\varphi})|^2 = \sqrt{2 - 2\cos\theta} = \sqrt{2(1 - (\cos^2\frac\theta 2 - \sin^2\frac \theta 2))} = \sqrt{4\sin^2\frac\theta2} = 2\sin \frac \theta 2$. Then, we get 
+    \begin{align*}
+        \ket{\psi_-} &\sim (\frac{\cos\theta - 1}{2\sin \frac \theta 2}, \frac{2\sin \frac\theta 2 \cos \frac \theta 2}{2\sin \frac \theta 2} e^{i \varphi})\\
+        &\sim (-\sin\frac \theta 2, \cos \frac\theta 2 e^{i \varphi})
+    \end{align*}
+    splitting the $e^{i\varphi}$ between the two components gives the desired result. The same can be done for $\ket{\psi_+}$.
+\end{ans}
+
+\newpage 
+\begin{exc}{8a}
+    A linear array of $n$ atoms is arranged so that electrons can hop from
+one atom to another. Each of these atoms represent a state in a Hilbert
+space. Determine the matrix representation of a shift operator that,
+when acting on an electron in a particular state, takes it to the nearest
+neighbor state to the right. Is this operator Hermitian?
+\end{exc}
+\begin{ans}
+    Enumerate the atoms from left to right as $i = 1, \ldots, n$ and set $\ket{i}$ to be the state of an electron bound to atom $i$. Represented in this basis, the operator that shifts an electron to the nearest neighbor state to the right is given by 
+    \[S_R = \begin{pmatrix}
+        0 & 0 & \ldots & 0 & 0 \\ 
+        1 & 0 & \ldots & 0 & 0 \\ 
+        0 & 1 & \ddots & 0 & 0 \\ 
+        \vdots & \vdots & \ddots & \ddots & 0 \\ 
+        0 & 0 & \ldots & 1 & 0
+    \end{pmatrix}\]
+    The operator is evidently non-hermitian as $(S_R)_{10} = 1 \neq 0^* = (S_R)_{01}$.
+\end{ans}
+
+\begin{exc}{8b}
+     Give an example of an operator that is both Hermitian and unitary.
+Show that an operator that is neither Hermitian nor unitary can always
+be written as a linear combination of a Hermitian and an anti-Hermitian
+operator
+\end{exc}
+\begin{ans}
+ The matrix 
+ \[\begin{pmatrix}
+    0 & e^{i\phi} \\ e^{-i\phi} & 0
+ \end{pmatrix}\]
+ is Hermitian and unitary for any angle $\phi$. 
+
+ Given an arbitrary operator $A$. Note that $A + A^\dagger$ is Hermitian and $A - A^\dagger$ is anti-Hermitian. Thus, 
+ \[A = \frac{A + A^\dagger}2 + \frac{A - A^\dagger}{2}\]
+ is the sum of a Hermitian and anti-Hermitian operator.
+\end{ans}
+
+\begin{exc}{8c}
+    Imagine you are rotating about an axis at a uniform angular velocity.
+Your friend, on the other hand, is stationary. Both of you observe a
+spin 1
+2 particle. From your point of view the spin 1
+2 particle is rotating
+about that axis in the opposite direction. After every $2\pi$ rotation, do
+you and your friend see different phase factors of the spin 1
+2 particle?
+\end{exc}
+\begin{ans}
+
+\end{ans}
+
+\begin{exc}{8d}
+In a Stern-Gerlach experiment $SG_z$ there are always some small mag-
+netic field gradients along x and y directions due to $\nabla \cdot B = 0$ constraint.
+How do these gradients effect the outcome of the $SG_z$ device?
+\end{exc}
+\begin{ans}
+    Remembering that $F = -\nabla (\mu \cdot \vec B)$, we see that the $x$ and $y$ gradients lead to forces in these directions. These will lead to peaks in the $x$ and $y$ directions corresponding to these eigenstates.
+\end{ans}
+\newpage 
+\begin{exc}{9a}
+
+\end{exc}
+\begin{ans}
+Comparing components of the vector equation give the commutation relations exactly.
+\end{ans}
+\begin{exc}{9b}
+Imagine I manage to create a state that is a simultaneous eigenstate of
+$J_x$ and $J_y$. Determine the eigenvalues of this state.
+\end{exc}
+\begin{ans}
+Suppose $\ket{\psi}$ is such a state with $J_x \ket{\psi} = j_x \ket \psi, J_y \ket \psi = j_y \ket \psi$. We see then that 
+\[i\hbar J_z \ket \psi = [J_x, J_y]\ket\psi = 0\ket\psi\]
+Thus, $\ket\psi$ must be in some combination of $\ket{j, m = 0}$ orbitals. We note that $j = 0$ gives eigenvalues of $0$ for each $J_i$. Thus, $\psi = \ket{j = 0,m = 0}$.
+\end{ans}
+\begin{exc}{9c}
+In a two dimensional Hilbert space I construct an operator that acting
+twice on the basis vectors annihilate them. On the other hand the anti-
+commutator of this operator with its adjoint behaves     as an identity
+operator in this space. Can you determine the operator uniquely?
+\end{exc}
+\begin{ans}
+No you cannot. Let $T$ be an operator with $T^2 = 0$ and $TT^\dagger + T^\dagger T = 1$. Consider the operator $\overline T = e^{i\theta}T$. Then, we see that $\overline T^2 = e^{i2\theta}T^2 = 0$ and $\{\overline T, \overline{T}^\dagger\} = e^{i\theta}T e^{-i\theta}T^\dagger + e^{-i\theta}T^\dagger e^{i\theta}T = TT^\dagger + T^\dagger T = 1$. So $T$ is uniquely determined. Even if the Hilbert Space was over a real field, $T$ is not uniquely determined. As $\frac12\begin{pmatrix}
+    1 & 1 \\ 
+    -1 & -1
+\end{pmatrix}$ and $\frac12\begin{pmatrix}
+    1 & -1 \\ 
+    1 & -1
+\end{pmatrix}$ both satisfy the desired properties.
+\end{ans}
+
+\begin{exc}{9d}
+    A Hermitian operator $A$ is diagonisable by a Unitary operator $U$. Show
+that if another operator $B$ is diagonisable by the same operator $U$ then
+the operators $A$ and $B$ must commute.
+\end{exc}
+\begin{proof}
+    By assumption, $A = UA_DU^\dagger$ and $B = UB_D U^\dagger$ where $A_D$ and $B_D$ are diagonal matrices. Note that $A_D$ and $B_D$ commute since they are diagonal. Then, we see that 
+    \[AB = (UA_DU^\dagger)(UB_D U^\dagger) = UA_DB_DU^\dagger = UB_DA_DU^\dagger = BA\]
+    as desired.
+\end{proof}
+\end{document}

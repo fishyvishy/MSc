@@ -1,0 +1,104 @@
+\documentclass[12pt]{article}
+\input{../template.tex}
+
+\fancyhead[CO,C]{\textbf{PHYS606}}
+\fancyhead[RO,R]{PSET 1}
+
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\norm}[1]{||#1||}
+
+\begin{document}
+\begin{exc}{1a}
+\end{exc}
+\begin{ans}
+    Set $\ket{1}$ to have 0 energy. Move to rotating frame, valid if $\delta(t)$ assumed to vary slowly compared to ..., apply RWA to get 
+    \[\HH = -\hbar \delta(t) \ketbra{2}{2} - \hbar\ab(\frac \Omega 2 \ketbra{2}{1} + \frac{\Omega}{2} \ketbra{1}{2}) \simeq -\hbar \begin{pmatrix}
+        0 & \Omega /2\\
+        \Omega/2 & \delta(t)
+    \end{pmatrix}\]
+    Eigenvalues $\lambda$ of matrix given by 
+    \[-\lambda(\delta(t) - \lambda) - \frac{\Omega^2}{4} = 0 \implies E_{\pm} = -\frac \hbar 2 (\delta \pm \underbrace{\sqrt{\delta^2 + \Omega^2}}_{:= \Omega_R})\]
+    with normalized eigenstates 
+    \begin{align*}
+        E_A &= -\frac \hbar 2 (\delta + \Omega_R), \qquad \ket{A(t)} = \Omega \ket{1} - \frac 2\hbar E_B\ket 2\\
+        E_B &= -\frac \hbar 2 (\delta - \Omega_R), \qquad \ket{B(t)} = \Omega \ket{1} -\frac 2\hbar E_A \ket 2
+    \end{align*}
+    We leave $\ket{A(t)}$ and $\ket{B(t)}$ unnormalized, but denote their square norms by
+    \[N_A = \braket{A(t)}{A(t)} = \Omega^2 + \frac{4E_B^2}{\hbar^2}, \qquad N_B = \braket{B(t)}{B(t)} = \Omega^2 + \frac{4E_A^2}{\hbar^2}\]
+    As $\delta \to \infty$, then $\Omega_R \to \delta$ and we get 
+    \begin{align*}
+        E_A \to -\hbar \delta, \quad \ket{A(t)} \to \ket{1}        \\
+        E_B \to 0, \quad \ket{B(t)} \to \ket{2}
+    \end{align*}
+    As $\delta \to -\infty$, then $\Omega_R \to -\delta$ and
+    \begin{align*}
+        E_A \to 0, \qquad \ket{A(t)} \to \ket{2} \\
+        E_B \to -\hbar \delta, \qquad \ket{B(t)} \to \ket{1}
+    \end{align*}
+\end{ans}
+
+\begin{exc}{1b}
+\end{exc}
+\begin{ans}
+Remark: $i\hbar \ket{\dot A(t)} \neq H\ket{A(t)}$ because $A(t)$ is an instantaneous eigenvector of $H$ and the time dependence is due only to $\delta(t)$.
+With $\ket{\psi(t)} = a(t)\ket{A(t)} + b(t)\ket{B(t)}$, we get
+\begin{equation}
+    i\hbar \ket{\dot \psi(t)} = i\hbar\ab(\dot a(t) \ket{A(t)} + a(t) \ket{\dot A(t)} + \dot b(t) \ket{B(t)} + b(t) \ket{\dot B(t)})
+\end{equation}
+and 
+\begin{equation}
+    H\ket{\psi(t)} = a(t)E_A\ket{A(t)} + b(t) E_B\ket{B(t)}
+\end{equation}
+Recall that eigenvectors, $v_i$ of hermitian operator, $A$, with different eigenvalues, $\lambda_i$ are orthogonal, as 
+\[\braket[3]{v_i}{A}{v_j} = \lambda_i \braket{v_i}{v_j} = \lambda_j \braket{v_i}{v_j} \implies (\lambda_i - \lambda_j)\braket{v_i}{v_j} = 0\]
+
+Thus, applying $\bra{A(t)}$ and $\bra{B(t)}$ to both sides of the hamiltonian equation. 
+\begin{align*}
+    i\hbar \dot a  N_A  + i\hbar a \braket{A}{\dot A} + i \hbar b \braket{A}{\dot B} &= a E_A  N_A\\
+    i\hbar a \braket{B}{\dot A} + i \hbar \dot bN_B + i\hbar b \braket{B}{\dot B}  &= bE_B N_B
+\end{align*}
+From 1a, we have that 
+\[\ket{\dot A} = -\frac{2}{\hbar}\dot E_b \ket{2} = \dot\delta\ket{2}, \qquad \ket{\dot B} = -\frac{2}{\hbar}\dot E_A\ket{2} = \dot \delta \ket{2}\]
+We have the inner products 
+\begin{align*}
+    \braket{A}{\dot B} &= \dot \delta(\delta - \Omega_R) \\
+    \braket{B}{\dot A} &= \dot \delta (\delta + \Omega_R)
+\end{align*}
+To determine $\braket{A}{\dot A}$, we note that 
+\[N_A = \braket{A}{A} \implies \odv{N_A}{t} = \braket{\dot A}{A} + \braket{A}{\dot A} = 2\braket{A}{\dot A}\]
+We calculate 
+\begin{align*}
+    \odv{N_A}{t} = \frac{4}{\hbar^2} 2E_B\dot E_B = \frac{4}{\hbar^2} 2E_b \cdot (-\frac\hbar 2 \dot\delta) = -\frac{4E_b \dot \delta}{\hbar} \implies \braket{A}{\dot A} = -\frac{2E_B\dot\delta}{\hbar} 
+\end{align*}
+Similarly, 
+\[\braket{B}{\dot B} = -\frac{2E_A\dot \delta}{\hbar}\]
+the last step holds since $\ket{A}$ is imbedded in a real vector space spanned by $\ket{1},\ket{2}$.
+
+Plugging in these inner products gives us the EOMs 
+\begin{align*}
+    i \hbar \dot a  + i \hbar b \frac{\dot \delta(\delta - \Omega_R)}{2\Omega_R \Omega} &= aE_A  \\
+    i\hbar a \frac{\dot \delta(\delta + \Omega_R)}{2\Omega_R \Omega} + i\hbar \dot b &= bE_B
+\end{align*}
+Simplifying gives us 
+\begin{align*}
+    \dot a &= - a\frac{iE_A}\hbar  - b \frac{\dot \delta (\delta - \Omega_r)}{2 \Omega_R\Omega } \\ 
+    \dot b &= - b \frac{iE_B}{\hbar} - a \frac{\dot \delta(\delta + \Omega_R)}{2\Omega_R\Omega}
+\end{align*}
+In the adiabatic limit, $\dot \delta \approx 0$ since it changes very slowly, hence we get 
+\begin{align*}
+     \dot a &= - a\frac{iE_A}\hbar \\ 
+    \dot b &= - b \frac{iE_B}{\hbar} 
+\end{align*}
+this implies that our state $\ket{\psi(t)}$ just picks up phase factors on the basis states and does not mix states.
+\end{ans}
+
+\begin{exc}{1c}
+
+\end{exc}
+\begin{ans}
+    We have $a(t) = a(0)e^{-i E_At/\hbar}$ and $b(t) = b(0) e^{-i E_Bt/\hbar}$. For $\ket{\psi(0)} = \ket 1$, we have $a(0) = 1$ and $b(0) = 0$. Thus, 
+    \[\ket{\psi(t)} = e^{-iE_At/\hbar}\ket{1}\]
+\end{ans}
+\end{document}
+
+
