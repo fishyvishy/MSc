@@ -116,11 +116,11 @@ Simplifying gives us
     \label{eqn:1a_EOMS_for_b}
     \dot b &= - \frac{iE_B}{\hbar} b + \frac{\dot\delta\Omega}{2(\delta^2 + \Omega^2)} a
 \end{align}
-In the adiabatic limit, $\dot \delta \approx 0$ as it changes very slowly, we get
+In the adiabatic limit where $\delta$ changes very slowly, $\dot \delta \approx 0$ and we get
 \begin{align*}
      \dot a &= - \frac{iE_A}\hbar a, \qquad \dot b = -\frac{iE_B}{\hbar} b
 \end{align*}
-this implies that our state $\ket{\psi(t)}$ just picks up phase factors on the basis states $\ket{A(t)}, \ket{B(t)}$ and does not mix these states. We can then, for example, follow $\ket{A(t)}$ from $\delta << 0$ to $\delta >> 0$ to traverse from $\ket{2} \to \ket{1}$. 
+this implies that our state $\ket{\psi(t)}$ just picks up phase factors on the basis states $\ket{A(t)}, \ket{B(t)}$ and does not mix these states. We can then, for example, follow $\ket{A(t)}$ from $\delta \ll 0$ to $\delta \gg 0$ to traverse from $\ket{2} \to \ket{1}$. 
 \end{ans}
 
 \begin{lem}
@@ -146,7 +146,7 @@ this implies that our state $\ket{\psi(t)}$ just picks up phase factors on the b
 \begin{ans}
     We have $a(t) = a(0)e^{-i E_At/\hbar}$ and $b(t) = b(0) e^{-i E_Bt/\hbar}$. For $\ket{\psi(0)} = \ket 1 = a(0)\ket{A(0)} + b(0) \ket{B(0)} \approx a(0)\ket{2} + b(0) \ket{1}$, if we begin very negatively detuned. This gives $a(0) = 0$ and $b(0) = 1$. Thus, $a(t) = 0$ and $b(t) = e^{-iE_bt/\hbar}$. Hence, 
     \[\ket{\psi(t)} = e^{-iE_Bt/\hbar}\ket{B(t)}\]
-    Thus, if we adiabatically change the detuning from negative to positive, $\ket{B(t)}$ goes from state $\ket 1 \to \ket 2$ as shown in 1a. Thus, we can take the inital population in state 1 to state 2. 
+    Thus, if we adiabatically change the detuning from negative to positive, $\ket{B(t)}$ goes from state $\ket 1 \to \ket 2$ as shown in 1a. By this method, we can take the inital population in state 1 to state 2. 
 \end{ans}
 
 
@@ -154,15 +154,15 @@ this implies that our state $\ket{\psi(t)}$ just picks up phase factors on the b
 
 \end{exc}
 \begin{ans}
-    We want equations \ref{eqn:1a_EOMS_for_a} and \ref{eqn:1a_EOMS_for_b} to be uncoupled. The coupling term is $\dot \delta \Omega/(2 (\delta^2 + \Omega^2))$. THe other relevant physical equantity is the energy \emph{difference} $|E_A - E_B|/\hbar$. For adiabatic passage, we thus need 
+    We want equations \ref{eqn:1a_EOMS_for_a} and \ref{eqn:1a_EOMS_for_b} to be uncoupled. The coupling term is $\dot \delta \Omega/(2 (\delta^2 + \Omega^2))$. The other relevant physical equantity is the energy \emph{difference} $|E_A - E_B|/\hbar$. For adiabatic passage, we impose that
     \[\frac{\dot \delta \Omega}{2 (\delta^2 + \Omega^2)} \ll \frac1\hbar(E_A - E_B) = \frac12(\delta + \Omega_R - (\delta - \Omega_R)) = \Omega_R\]
-    Thus, 
+    Thus,
     \[\dot \delta \ll \frac{2\Omega_R(\delta^2 + \Omega^2)}{\Omega}\]
-    The lower limit of this expression occurs when $\delta = 0$ and $\Omega_R \to \Omega$. Thus, for the inequality to hold at all $\delta$, we require 
+    The lower limit of this expression occurs when $\delta = 0$ and $\Omega_R \to \Omega$. For the inequality to hold at all $\delta$, we require 
     \[\dot \delta \ll \frac{2\Omega(\Omega^2)}{\Omega} = 2\Omega^2\]
     as desired.
 
-    For a resonant $\pi$ pulse, we use a pulse duratio $\tau$ defined by $\Omega T\tau = \pi \implies \tau = \pi/\Omega$. In comparison, if $\odv{\delta}{t} \ll 2\Omega^2$, then we have 
+    For a resonant $\pi$ pulse, we use a pulse duration $\tau$ defined by $\Omega T\tau = \pi \implies \tau = \pi/\Omega$. In comparison, if $\odv{\delta}{t} \ll 2\Omega^2$, then we have 
     \[\delta(T) - \delta(0) \ll 2\Omega^2 T \implies T \gg \frac{\delta(T) - \delta(0)}{2\Omega^2} > \frac{2\Omega}{\Omega^2} = \frac1\Omega \approx \frac{\pi}{\Omega} = \tau\]
     where population inversion requires $|\delta| \gg \Omega$ and if $\delta(0) < 0$, then $\delta(T) - \delta(0) > 2\Omega$. We conclude that adiabatic passage thus requires much longer times than resonant pulses.
 \end{ans}
@@ -265,13 +265,27 @@ this implies that our state $\ket{\psi(t)}$ just picks up phase factors on the b
     Take the $+$ solution since the problem assumes $\delta  = \nu - \omega_{12} > 0$.
 
 
-    If such $\delta$ is chosen, then the effect of state 3 is to induce a phase shift so that the oscillation frequency goes from $\frac \Omega 2 \to \sqrt{\frac{\Omega^2}4 + \delta^2}$. Otherwise, for relatively weak driving fields or large detuning, our system looks like $\dot c_1 = -i\delta c_1$ and $\dot c_2 = o\delta c_2$, so that state 3 causes energy shifts by $\delta = -\Omega^2/(4(\delta \omega - \delta))$. This looks like an AC stark shift.
+    If such $\delta$ is chosen, then the effect of state 3 is to induce a phase shift so that the oscillation frequency goes from $\frac \Omega 2 \to \sqrt{\frac{\Omega^2}4 + \delta^2}$. Otherwise, for relatively weak driving fields or large detuning, our system looks like $\dot c_1 = \Omega^2/(4(\delta \omega - \delta)) c_1$ and $\dot c_2 = -i\delta c_2$, so that state 3 causes an energy shift by $\delta = \Omega^2/(4(\delta \omega - \delta))$ to state 1. This looks like an AC stark shift.
 \end{ans}
 
 \begin{exc}{2d}
 
 \end{exc}
+\begin{ans}
+Using our answer for part (3) that the effect of state 3 looks like a stark shift of $\Omega^2/(4(\Delta \omega - \delta))$ for general $\delta$, we see that this will cause phase evolution of the states as $e^{-i \Omega^2t/(4\Delta \omega - \delta)}$. To minimize this effect, we require 
+\[\frac{\Omega^2}{4(\Delta \omega - \delta)}t \ll 1 \implies t \ll \frac{4(\Delta \omega - \delta)}{\Omega^2}\]
 
+For $\delta = 0$, we get 
+\[t \ll \frac{4\Delta \omega}{\Omega^2}\]
+The rabi oscillations between states occur at frequency $\Omega/2$, so a full rotation occurs when $T\Omega/2 = 2\pi \implies T = 4\pi/\Omega$. Thus, the number of full rotations we can perform before decoherence is 
+\[\#\textrm{(Full Rotations)} = \frac{t}{T} = \frac{4\Delta \omega / \Omega^2}{4\pi/\Omega} = \frac{\Delta \omega}{\pi\Omega}\]
+In the spin resonance example, we get 
+\begin{align*}
+    t \ll \frac{4(100 - 0)}{10^2}\frac1{\unit{MHz}} = 4 \unit{\micro s}
+\end{align*}
+and the number of rotations is
+\[\frac{100}{10\pi } = \frac{10}{\pi} \approx 3.1\]
+\end{ans}
 \newpage 
 \begin{exc}{3a}
 
@@ -320,10 +334,10 @@ this implies that our state $\ket{\psi(t)}$ just picks up phase factors on the b
 \end{exc}
 \begin{ans}
     The outgoing state is spanned by the $\ket k$ states, so 
-    \[\ket{\psi^{\textrm{out}}} = \sum_{k = -\infty}^\infty c_k(t)\ket{k}\]
+    \[\uket{\psi^{\textrm{out}}} = \sum_{k = -\infty}^\infty c_k(t)\ket{k}\]
     The real-space wavefunction is given by 
     \begin{align*}
-        \psi^{\textrm{out}}(x, t) = \braket{x}{\psi^{\textrm{out}}} = \sum_{k = -\infty}^\infty c_k(t) \braket{x}{k} = \sum_{k = -\infty}^\infty c_k(t)e^{ikx}
+        \psi^{\textrm{out}}(x, t) = \ubraket{x}{\psi^{\textrm{out}}} = \sum_{k = -\infty}^\infty c_k(t) \braket{x}{k} = \sum_{k = -\infty}^\infty c_k(t)e^{ikx}
     \end{align*}
     With density of states $\odv{N}{k} = \rho$, we can take $N = \sum_k \to \int \rho dk$, so that
     \begin{align*}
@@ -331,7 +345,26 @@ this implies that our state $\ket{\psi(t)}$ just picks up phase factors on the b
         &= \int_{-\infty}^\infty \rho c_k(t) e^{ikx}dk\\
         &= ig \int_{-\infty}^\infty  \rho e^{ikx} \int_0^t e^{i\delta_k(t - \tau)}f(\tau)b(\tau)d\tau dk \\ 
         &= ig \rho \int_0^t f(\tau)b(\tau) \int_{-\infty}^\infty e^{ikx}e^{i \delta_k(t - \tau)}dk d\tau \\ 
-        &= i 2\pi g \rho \int_0^t f(\tau)b(\tau) e^{i\nu(t - \tau)}\ab[\delta(x - v_0(\tau - t)) + \delta(x + v_0(\tau + t))]d\tau 
+         &= ig \rho \int_0^t f(\tau)b(\tau) \int_{-\infty}^\infty e^{ikx}e^{i(\nu - v_0|k|)(t - \tau)}dk d\tau \\ 
+         &= ig \rho \int_0^t f(\tau)b(\tau) e^{i\nu(t - \tau)}\int_{-\infty}^\infty e^{ikx}e^{iv_0|k|(t - \tau)}dk d\tau   \\ 
+         &= i 2\pi g \rho \int_0^t f(\tau)b(\tau) e^{i\nu(t - \tau)}\ab[\delta(x - v_0(\tau - t)) + \delta(x + v_0(\tau + t))]d\tau 
+    \end{align*}
+    We calculate the inner integral as 
+    \begin{align*}
+        I &= \int_{-\infty}^\infty e^{ikx}e^{iv_0|k|(t - \tau)}dk\\ 
+        &= \int_{-\infty}^0 e^{ikx}e^{-iv_0k(t - \tau)}dk + \int_{0}^\infty e^{ikx}e^{iv_0k(t - \tau)}dk \\
+        &= \int_{-\infty}^0 e^{ik(x - v_0(t - \tau))}dk + \int_{0}^\infty e^{ik(x + v_0(t - \tau)}dk
+    \end{align*}
+    With $x' = x \pm v_0(t - \tau)$, we recognize these integrals as Fourier transforms of the function $f(k) = 1$, . Hence, we get $\mathcal F\{1\} = 2\pi \delta(x')$. Thus, 
+    \begin{align*}
+        I = 2\pi\delta(x - v_0(t - \tau)) + 2\pi\delta(x + v_0(t - \tau))
+    \end{align*}
+    Substituting back into our original wavefunction, we find 
+    \begin{align*}
+         \psi^{\textrm{out}}(x, t) 
+         &= ig \rho \int_0^t f(\tau)b(\tau) e^{i\nu(t - \tau)}\ab[2\pi\delta(x - v_0(t - \tau)) + 2\pi\delta(x + v_0(t - \tau))]d\tau  \\
+         &= i2\pi g \rho\bigg(\Theta(x)\Theta(t - x/v_0)f(t - x/v_0)b(t - x/v_0)e^{i\nu x/v_0} \\ 
+         & \qquad +  \Theta(-x)\Theta(t + x/v_0)f(t + x/v_0)b(t + x/v_0)e^{-i\nu x/v_0}\bigg)
     \end{align*}
 \end{ans}
 \end{document}
