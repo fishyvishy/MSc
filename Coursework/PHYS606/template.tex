@@ -102,26 +102,7 @@
 \theoremstyle{definition}
 \newtheorem*{sol}{Sol}
 
-\newtcbtheorem[number within=section]{cthm}{Theorem}%
-{colback=green!8!white, colframe=green!40!black,fonttitle=\bfseries, fontupper=\itshape}{mainthm}
 
-\newtcbtheorem[number within=section]{cexercise}{Exercise}%
-{colback=green!8!white, colframe=green!40!black,fonttitle=\bfseries, fontupper=\itshape}{mainthm}
-
-\newtcbtheorem[number within=section]{cclaim}{Claim}%
-{colback=green!8!white,colframe=green!40!black,fonttitle=\bfseries, fontupper=\itshape}{claim}
-
-\tcolorboxenvironment{sol}{breakable, enhanced, left=5mm,
-    before skip=10pt, after skip=10pt, frame  hidden,colback=green!6!white,
-    borderline west={1pt}{0pt}{green!60!black}}
-
-\tcolorboxenvironment{lem}{
-    enhanced jigsaw,colback=green!8!white, colframe=green!40!black,breakable,before skip=10pt,after skip=10pt }
-
-\tcolorboxenvironment{proof}{% `proof' from `amsthm' 
-    blanker,breakable,left=5mm,
-    before skip=10pt,after skip=10pt,
-    borderline west={1pt}{0pt}{green!60!black}}
 
 % \newtcolorbox{ansbox}{tcbox raise base, leftrule=0pt, arc=0pt, rightrule=0pt,toprule=0mm,bottomrule=0mm, colback=green!8!white, colframe=green!20!black}
 
@@ -205,3 +186,25 @@
     coltitle=bordercolor,
     }
 % \newcommand{\exc}[1]{\begin{exc}#1\end{exc}}
+
+
+\newtcbtheorem[number within=section]{cthm}{Theorem}%
+{colback=green!8!white, colframe=green!40!black,fonttitle=\bfseries, fontupper=\itshape}{mainthm}
+
+\newtcbtheorem[number within=section]{cexercise}{Exercise}%
+{colback=green!8!white, colframe=green!40!black,fonttitle=\bfseries, fontupper=\itshape}{mainthm}
+
+\newtcbtheorem[number within=section]{cclaim}{Claim}%
+{colback=green!8!white,colframe=green!40!black,fonttitle=\bfseries, fontupper=\itshape}{claim}
+
+\tcolorboxenvironment{sol}{breakable, enhanced, left=5mm,
+    before skip=10pt, after skip=10pt, frame  hidden,colback=green!6!white,
+    borderline west={1pt}{0pt}{green!60!black}}
+
+\tcolorboxenvironment{lem}{
+    enhanced jigsaw,colback=green!8!white, colframe=bordercolor, colback=white, breakable,before skip=10pt,after skip=10pt }
+
+\tcolorboxenvironment{proof}{% `proof' from `amsthm' 
+    blanker,breakable,left=5mm,
+    before skip=10pt,after skip=10pt,
+    borderline west={1pt}{0pt}{green!60!black}}

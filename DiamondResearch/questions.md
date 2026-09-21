@@ -38,3 +38,7 @@
 
 1. How zero field splitting depends on temperature?
 
+1. what is state notation ($^1E_2$, $^2A_3$)?
+
+1. "Ensemble Magnetometry"?
+
