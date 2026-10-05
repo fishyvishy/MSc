@@ -43,5 +43,8 @@ Date: Aug 18th, 2026
 
 # 6th
 
-## TD
-- any numerical simulations that I could do for 512 project related to NVs? 
+# 7th 
+- What to submit on myprogress for master's assignment
+- progress on RIEF code 
+- any num simulations for 512 project 
+- can I go back home for reading week?

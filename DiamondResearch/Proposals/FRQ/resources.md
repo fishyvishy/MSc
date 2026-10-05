@@ -1,0 +1,1 @@
+https://frq.gouv.qc.ca/app/uploads/2026/07/regles_bourses_maitrise_2027-2028_angv2.pdf

@@ -1,0 +1,77 @@
+\documentclass[12pt]{article}
+\input{../template.tex}
+
+\fancyhead[CO,C]{\textbf{PHYS606}}
+\fancyhead[RO,R]{PSET 2}
+
+\begin{document}
+\begin{exc}{1a}
+\end{exc}
+\begin{ans}
+    The full hamiltonian for the system is given by 
+    \[\HH = \HH_{\text{atom}} + \HH_{\text{int}} + \HH_{\text{field}} \]
+    Let $\ketbra{i}{j} = \ket{i} \otimes \bra{j_k}$ be a basis for the system with $\ket{i}$ being eigenstates of the atom and $\ket{j_k}$ representing a field with $j$ photons in mode $k$. Setting $\ket{1}$ to be zero energy, the atomic hamiltonian is given by
+    \begin{align*}
+        \HH_{\text{atom}}&= \hbar\omega_{12}\ketbra{2}{2} + \hbar\omega_{13}\ketbra{3}{3}
+    \end{align*}
+    The radiation field has hamiltonian 
+    \begin{align*}
+        \HH_{\text{field}} &= \sum_{k, \lambda} \hbar\nu_{k,\lambda}\ab(a_{k\lambda}^\dagger a_{k\lambda} + \frac{1}{2})
+    \end{align*}
+    and the interaction hamiltonian is given by 
+    \begin{align*}
+        \HH_{\text{int}} &= - \hat d \cdot \hat E = -\sum_{\alpha, \alpha'} \ketbra{\alpha}{\alpha} \hat d \ketbra{\alpha'}{\alpha'} \cdot \sum_{k, \lambda} \sqrt{\frac{\hbar \nu_k}{2\e_0 V}} \left(\hat a_{k\lambda}\hat \e_{k\lambda}e^{i\vec k \cdot \vec r} + \hat a_{k\lambda}^\dagger \e_{k\lambda}^* e^{-i\vec k \cdot \vec r}\right)
+    \end{align*}
+    By assumption, $\uelem{2}{\hat d}{1} = \uelem{3}{\hat d}{1} = \mu \vu z$. Letting $g_k = \frac{\mu}{\hbar}\sqrt{\hbar \nu_k/2\e_0 V}(\hat \e_k \cdot \hat z) e^{i\vec k \cdot \vec r}$, we get  
+    \begin{align*}
+        \HH_{\text{int}} &= -\hbar\sum_{k, \lambda} g_k \left(\ketbra{2}{1} + \ketbra{3}{1}\right) \hat a_{k\lambda} + g_k^* \left(\ketbra{1}{2} + \ketbra{1}{3}\right) \hat a_{k\lambda}^\dagger
+    \end{align*}
+    To study spontaneous emission, we consider states $\ket{2, 0}, \ket{3, 0}$ (atom in excited state, no photons) and $\ket{1, 1_k}$ (atom in ground state after emitting photon in mode $k$). We evaluate the matrix elements as 
+    \begin{align*}
+        \uelem{2, 0}{\HH}{2, 0} &= \hbar \omega_{12}\\
+        \uelem{3, 0}{\HH}{3, 0} &= \hbar \omega_{13}\\
+        \uelem{1, 1_k}{\HH}{1, 1_k} &= \hbar \nu_k \\
+        \uelem{2, 0}{\HH}{1, 1_k} &= -\hbar g_k \\
+        \uelem{3, 0}{\HH}{1, 1_k} &= -\hbar g_k
+    \end{align*}
+    where we ignored the $\hbar\nu_k/2$ term in the field hamiltonian since it adds a constant to the total energy, irrelevant to dynamics. Thus, we get 
+    \begin{align*}
+        \HH &= \underbrace{\hbar\omega_{12}\ketbra{2}{2} + \hbar\omega_{13}\ketbra{3}{3} + \sum_{k}\hbar \nu_k\ketbra{k}{k}}_{:= \HH_0}  - \sum_{k} \ab(\hbar g_k\ketbra{2}{k} + \hbar g_k\ketbra{3}{k} + \text{h.c.})
+    \end{align*}
+    where we dropped the sum over $\lambda$ by absorbing it implicitly into the sum over $k$.  Let $\HH_1$ be the interaction part of the hamiltonian, i.e $\HH_1 = \HH - \HH_0$. We move to the interaction picture w.r.t $\HH_0$ by defining $\ket{\psi_I} = \hat U^{-1}\ket{\psi}$ where $\hat U = e^{-i\HH_0 t/\hbar}$. Then, 
+    \begin{align*}
+        i\hbar\odv{\ket{\psi_I}}{t} &= i\hbar \odv{\hat U^{-1}}{t} \ket{\psi} + i\hbar \hat{U}^{-1}\odv{\ket{\psi}}{t} \\
+        &= - \HH_0 \hat U^{-1} \ket{\psi} + \hat U^{-1}(\HH_0 + \HH_1) \ket\psi \\
+        &= \hat U^{-1} \HH_1 \ket{\psi}\\
+        &= \hat U^{-1} \HH_1 \hat U \ket{\psi_I}
+    \end{align*}
+    where we used the fact that $\hat U^{-1}$ commutes with $\HH_0$ in the last step. Thus, our effective hamiltonian in the interaction picture is $\HH_{\text{eff}} = \hat U^{-1} \HH_1 \hat U$. We note that since $\HH_0$ is diagonal, we have 
+    \begin{align*}
+        \hat U^{-1}= e^{i\HH_0 t/\hbar} = e^{i\omega_{12}t}\ketbra{2}{2} + e^{i\omega_{13}t}\ketbra{3}{3} + \sum_k e^{i\nu_k t}\ketbra{k}{k}
+    \end{align*}
+    Hence, we get
+    \begin{align*}
+        \HH_{\text{eff}} &= -\hbar \sum_k g_k \ketbra{2}{k} e^{-i(\nu_k - \omega_{12})t} + g_k \ketbra{3}{k} e^{-i(\nu_k - \omega_{13})t}+ \text{h.c.}
+    \end{align*}
+\end{ans}
+
+\begin{exc}{1b}
+    
+\end{exc}
+\begin{ans}
+    Apply the unitary operator $\hat U = e^{-i\sum_k (\nu_k - \omega_{12}) \ketbra{k}{k}}$
+    We write $\ket{\psi_I(t)} = c_2(t) \ket 2 + c_3(t) \ket 3 + \sum_k c_k(t) \ket{k}$. Using the effective hamiltonian from part (a), we find 
+    \begin{align*}
+        i\hbar \odv{}{t}\ket{\psi_I(t)} 
+        &= \HH_{\text{eff}}\ket{\psi_I} \\ 
+        &= -\hbar \sum_k \ab(g_k^* c_2(t) e^{i(\nu_k - \omega_{12})t} + g_k ^* c_3(t) e^{i(\nu_k - \omega_{13})t})\ket{k} \\
+        &\qquad -\hbar\sum_k g_k c_k(t) e^{-i(\nu_k - \omega_{12})t}\ket{2} + g_k c_k(t) e^{-i(\nu_k - \omega_{13})t}\ket{3}
+    \end{align*}
+    We equate this to $i\hbar(\dot c_2(t)\ket 2 + \dot c_3(t)\ket 3 + \sum_k \dot c_k(t) \ket{k})$ and use the orthogonality of the basis kets to get the system 
+    \begin{align*}
+        \dot c_2(t) &= i\sum_k g_k c_k(t) e^{-i(\nu_k - \omega_{12})t} \\
+        \dot c_3(t) &= i\sum_k g_k c_k(t) e^{-i(\nu_k - \omega_{13})t} \\
+        \dot c_k(t) &= i g_k^* c_2(t) e^{i(\nu_k - \omega_{12})t} + ig_k ^* c_3(t) e^{i(\nu_k - \omega_{13})t}
+    \end{align*}
+\end{ans}
+\end{document}

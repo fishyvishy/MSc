@@ -23,3 +23,11 @@ Diamond](https://pubs.acs.org/apchd5/article-abstract/13/15/4101/5232149/Optical
 
 ### NV Center Readings 
 [The nitrogen-vacancy colour centre in diamond](https://arxiv.org/abs/1302.3288)
+
+
+- S. Felton, A. M. Edmonds, M. E. Newton, P. M. Martineau, D. Fisher, D. J.
+Twitchen, and V. N. Shiryaev, “Hyperfine interaction in the nitrogen-vacancy
+center in diamond,” Physical Review B, vol. 79, no. 7, p. 075203, 2009.
+
+
+- [Theory of the ground state spin of the NV center in diamond: I. Fine structure, hyperfine structure, and interactions with electric, magnetic and strain fields](https://arxiv.org/pdf/1107.3868)
