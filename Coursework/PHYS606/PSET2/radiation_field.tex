@@ -59,19 +59,44 @@
     
 \end{exc}
 \begin{ans}
-    Apply the unitary operator $\hat U = e^{-i\sum_k (\nu_k - \omega_{12}) \ketbra{k}{k}}$
-    We write $\ket{\psi_I(t)} = c_2(t) \ket 2 + c_3(t) \ket 3 + \sum_k c_k(t) \ket{k}$. Using the effective hamiltonian from part (a), we find 
+    Let $\ket{\psi_I(t)} = c_2(t) \ket 2 + c_3(t) \ket 3 + \sum_k c_k(t) \ket k$. We want to remove the explicit time dependence in $\HH_{\text{eff}}$. First, we bring up the energy of the $\ket k$ by making the unitary transformation $\uket{\overline \psi} = U_1 \ket{\psi}$, with $U_1 = e^{-i \sum_k (\nu_k - \omega_{13})t\ketbra{k}{k}} = \sum_k e^{-i(\nu_k - \omega_{13})t}\ketbra{k}{k}$. The last step holds since $\ket k$ is a basis element so $\sum_k \ketbra k k$ is diagonal. We see that 
+    \[i\hbar \odv{\ket{\overline \psi}}{t} = i\hbar \ab(\odv{U_1}{t} \ket{\psi} + U_1 \odv{\ket\psi}{t}) = (\underbrace{i\hbar \odv{U_1}{t} U_1^{\dagger} + U_1 \HH_{\text{eff}}U_1^{\dagger}}_{:= \overline{\HH}_{\text{eff}}})\ket{\overline \psi}\]
+    We have 
+    \[i\hbar \odv{U_1}{t} U_1^{\dagger} = i\hbar \ab(\odv{}{t} e^{-i\sum_k(\nu_k - \omega_{13})t \ketbra{k}{k}})U_1 = \hbar \sum_k(\nu_k - \omega_{13})\ketbra{k}{k} \]
+    and 
+    \[U_1 \HH_{\text{eff}}U_1^\dagger = -\hbar \sum_k g_k \ketbra{2}{k} e^{-i\omega_{23}t} + g_k \ketbra{3}{k} + \text{h.c.}\]
+    where $\omega_{23} = \omega_{13} - \omega_{12}$. Hence, 
+    \[\tub{\overline \HH}{eff} = \hbar \sum_k(\nu_k - \omega_{13})\ketbra{k}{k} -\hbar \sum_k g_k \ketbra{2}{k} e^{-i\omega_{23}t} + g_k \ketbra{3}{k} + \text{h.c.}\]
+    To get rid of the $e^{-i\omega_{23}t}$ dependence, we bring down state $\ket 2$ by $\omega_{23}$ with the unitary transform $\uket{\widetilde{\psi}} = U_2 \uket{\overline{\psi}}$ with $U_2 = e^{i\omega_{23}t \ketbra{2}{2}} = e^{i\omega_{23}t}\ketbra{2}{2}$ since $\ket 2$ is a basis element. Then, similar as before, we find 
+    \[\tub{\widetilde \HH}{eff} = -\hbar \omega_{23} \ketbra{2}2 +\hbar \sum_k(\nu_k - \omega_{13})\ketbra{k}{k} -\hbar \sum_k g_k \ketbra{2}{k} + g_k \ketbra{3}{k} + \text{h.c.}\]
+    Now, we look at the schrodinger equation, $i\hbar \odv{\uket{\widetilde \psi}}{t} = \tub{\widetilde{\HH}}{eff}$, where $\uket{\widetilde{\psi}} = \tilde c_2(t) \ket  2 + \tilde c_3(t) \ket 3 + \sum_k \tilde c_k(t) \ket k$, to get 
     \begin{align*}
-        i\hbar \odv{}{t}\ket{\psi_I(t)} 
-        &= \HH_{\text{eff}}\ket{\psi_I} \\ 
-        &= -\hbar \sum_k \ab(g_k^* c_2(t) e^{i(\nu_k - \omega_{12})t} + g_k ^* c_3(t) e^{i(\nu_k - \omega_{13})t})\ket{k} \\
-        &\qquad -\hbar\sum_k g_k c_k(t) e^{-i(\nu_k - \omega_{12})t}\ket{2} + g_k c_k(t) e^{-i(\nu_k - \omega_{13})t}\ket{3}
+        \dot{\tilde c}_2 &=  i\omega_{23} \tilde c_2 + i\sum_k g_k \tilde c_k  \\
+        \dot{\tilde c}_3 &=  i\sum_k g_k \tilde c_k \\ 
+        \dot{\tilde c}_k &= i\underbrace{(\omega_{13} - \nu_k)}_{:= \delta_k}\tilde c_k + ig_k^* \tilde c_2 + ig_k^* \tilde c_3
     \end{align*}
-    We equate this to $i\hbar(\dot c_2(t)\ket 2 + \dot c_3(t)\ket 3 + \sum_k \dot c_k(t) \ket{k})$ and use the orthogonality of the basis kets to get the system 
+    We integrate $\dot{\tilde c}_k$ using the integrating factor $e^{-i\delta_k t}$ to get 
+    \[c_k(t) = i g_k^*\int_0^t e^{-i\delta_k(t' - t)}(\tilde c_2(t') + \tilde c_3(t')) dt'\]
+    where we imposed the intial condition $\tilde c_k(0) = 0$. We assume $\tilde c_2$ and $\tilde c_3$ vary slowly so that
+    \[c_k(t) = i g_k^*(\tilde c_2(t) + \tilde c_3(t))\int_0^t e^{-i\delta_k(t' - t)} dt' = ig_k^*(\tilde c_2(t) + \tilde c_3(t))(\pi \delta(\delta_k) + i \pv \frac1{\delta_k})\]  
+    Plugging this into $\tilde c_2$ gives us 
     \begin{align*}
-        \dot c_2(t) &= i\sum_k g_k c_k(t) e^{-i(\nu_k - \omega_{12})t} \\
-        \dot c_3(t) &= i\sum_k g_k c_k(t) e^{-i(\nu_k - \omega_{13})t} \\
-        \dot c_k(t) &= i g_k^* c_2(t) e^{i(\nu_k - \omega_{12})t} + ig_k ^* c_3(t) e^{i(\nu_k - \omega_{13})t}
+        \dot{\tilde c}_2 &= i\omega_{23} \tilde c_2 - (\tilde c_2 + \tilde c_3)\sum_k |g_k|^2(\pi \delta(\delta_k) + i \pv \frac1{\delta_k})
+    \end{align*}
+    The $i\pv(1/\delta_k)$ term leads to energy shifts (lamb shifts in this context) which we can ignore. Invoking results form the notes, we evaluate 
+    \[\sum_k |g_k|^2\pi \delta(\delta_k) = \frac{\mu^2\omega_{13}^2}{3\pi\e_0\hbar c^3} \approx \frac{\mu^2\omega_{12}^2}{3\pi\e_0\hbar c^3} := \frac{\Gamma}{2}\]
+    where was assume $\omega_13 \approx \omega_12$. All together, we get 
+    \begin{align*}
+        \dot{\tilde c}_2 &= i\omega_{23}\tilde c_2 - (\tilde c_2 + \tilde c_3)\Gamma/2 = (i\omega_{23} - \Gamma/2)\tilde c_2 - (\Gamma/2)\tilde c_3
+    \end{align*}
+    For $\dot{\tilde c}_3$, we similarly get 
+    \begin{align*}
+        \dot{\tilde c}_3 &=  -(\tilde c_2 + \tilde c_3)\sum_k |g_k|^2(\pi \delta(\delta_k) + i \pv \frac1{\delta_k})\\ 
+        &= -(\Gamma/2)\tilde c_3 - (\Gamma/2)\tilde c_2
     \end{align*}
 \end{ans}
+
+\begin{exc}{1c}
+    
+\end{exc}
 \end{document}

@@ -48,3 +48,9 @@ Date: Aug 18th, 2026
 - progress on RIEF code 
 - any num simulations for 512 project 
 - can I go back home for reading week?
+
+
+# Oct 7th 
+- RIEF updates 
+- Group Meeting online option? 
+- 

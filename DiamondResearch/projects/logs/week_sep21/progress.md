@@ -12,7 +12,7 @@ Andrew's profile ('spectrum_profile.pstat')
             1    0.615    0.615   25.053   25.053 inhomogeneous_spectra.py:109(_generate_splittings_rabis_pops)
 
 
-# Oct 3rd, 2026 
+# Oct 2nd 
 
 no vectorization yet, ~9s see spectrum_profile.pstat. First few profiles were running generate_cw_odmr twice accidentally. 
 
@@ -40,9 +40,7 @@ Vectorized hamiltonian_hz
     - Hamiltonian Diagonalization looped = 129 ms ± 840 μs per loop (mean ± std. dev. of 7 runs, 1 loop each)
 
 - About a 200x speedup 
-
 - need to adapt inputs to function to permit vectorization
-
 
 
 # Oct 4th 

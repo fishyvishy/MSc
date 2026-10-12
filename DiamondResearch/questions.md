@@ -54,6 +54,11 @@
 1. What mechanism generates Zero Field Splitting 
 
 
+--- 
+
+1. Why does $^{14}N$ have spin of 1? Same number of protons and neutrons no?
+
+
 
 ## Data Analysis Related 
 1. If have collection of linear data $y_i$, $t_i$ related as $y_i = at_i$. What difference between averaging $a_i = t_i/y_i$ to get $a$ or fitting linear function to $y_i, t_i$ and using fit uncertainty?

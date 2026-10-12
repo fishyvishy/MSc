@@ -58,15 +58,31 @@
 ### Notes 
 - odmr_spectra_refactored/inhomogeous_spectra/InhomogenousTransitions._generate_splittings_rabis_pops is where bulk of calculation comes from 
 
+- using diagonal of $S_z$ and $J_z$ to determine $m_s = 0$ mask because $\bra{m_s = 0} S_z \ket{m_s = 0} = 0$ and $\bra{m_s = 0, mI} J_z\ket{m_s = 0, m_I} = \bra{m_s = 0, m_I}(S_z \otimes I_3)\ket{m_s = 0, m_I} = 0$
+
 
 ### Questions 
-- why not take the average electric field after generating the dataset? 
-- why is mw_polarization contribution not included in hamiltonian_hz. contribution included in `hamiltonian_diagonalizatoin.transition_freqs_and_weights'. 
-- Review how these transition frequnces and splittings calculated.
+- ~~why not take the average electric field after generating the dataset?~~ 
+- why is mw_polarization contribution not included in hamiltonian_hz. contribution included in `hamiltonian_diagonalization.transition_freqs_and_weights'. 
+- Review how these transition frequncies and splittings calculated.
 - ~~why called "b_vector_t" and not just "b_vector"~~ probably units (t = Tesla)
 
 
 -  why need `np.isclose(np.diag(SZ), 0)` instead of just == in `transition_freqs_rabis_pops`
+
+- Jack paper says "In what follows, we neglect the effect of the
+terms involving d′ because they are strongly suppressed
+by the large zero-field splitting" but hamiltonian includes $d'$ contribution
+
+
+- Confused on what ordered_eigensystem does
+    - eigh gives eigenstates $\vert {\phi_i} \rangle$ of hamiltonian. ordered indices seem to give eigenstates with highest amplitude in $\vert 1 \rangle, \vert 0 \rangle, \vert -1 \rangle$ respectively. 
+
+
+
+### Next Steps
+- Go through derivation in Wolfram of hamiltonian transition frequencies 
+- See how to apply to simulation code 
 
 ### Project Structure Examples 
 - [qutip](https://github.com/qutip/qutip/tree/master)
