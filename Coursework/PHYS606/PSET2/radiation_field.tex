@@ -28,11 +28,9 @@
     \end{align*}
     To study spontaneous emission, we consider states $\ket{2, 0}, \ket{3, 0}$ (atom in excited state, no photons) and $\ket{1, 1_k}$ (atom in ground state after emitting photon in mode $k$). We evaluate the matrix elements as 
     \begin{align*}
-        \uelem{2, 0}{\HH}{2, 0} &= \hbar \omega_{12}\\
-        \uelem{3, 0}{\HH}{3, 0} &= \hbar \omega_{13}\\
-        \uelem{1, 1_k}{\HH}{1, 1_k} &= \hbar \nu_k \\
-        \uelem{2, 0}{\HH}{1, 1_k} &= -\hbar g_k \\
-        \uelem{3, 0}{\HH}{1, 1_k} &= -\hbar g_k
+        \uelem{2, 0}{\HH}{2, 0} &= \hbar \omega_{12} & \uelem{3, 0}{\HH}{3, 0} &= \hbar \omega_{13}\\
+        \uelem{1, 1_k}{\HH}{1, 1_k} &= \hbar \nu_k & \uelem{2, 0}{\HH}{1, 1_k} &= -\hbar g_k \\
+        \uelem{3, 0}{\HH}{1, 1_k} &= -\hbar g_k &&
     \end{align*}
     where we ignored the $\hbar\nu_k/2$ term in the field hamiltonian since it adds a constant to the total energy, irrelevant to dynamics. Thus, we get 
     \begin{align*}
@@ -94,9 +92,146 @@
         \dot{\tilde c}_3 &=  -(\tilde c_2 + \tilde c_3)\sum_k |g_k|^2(\pi \delta(\delta_k) + i \pv \frac1{\delta_k})\\ 
         &= -(\Gamma/2)\tilde c_3 - (\Gamma/2)\tilde c_2
     \end{align*}
+    So, we get 
+    \begin{subequations}
+        \label{eqn:c2_c3_eoms}
+        \begin{align}
+            \dot{\tilde c}_2 &=  (i\omega_{23} - \Gamma/2)\tilde c_2 - (\Gamma/2)\tilde c_3 \\ 
+        \dot{\tilde c}_3 &= -(\Gamma/2)\tilde c_3 - (\Gamma/2)\tilde c_2
+        \end{align}
+    \end{subequations}
 \end{ans}
 
 \begin{exc}{1c}
+
+\end{exc}
+\begin{ans}
+ We note that unitary transformation preserve inner products as if $\ket{\tilde a_i} = U \ket{a_i}$ then $\braket{\tilde a_i}{\tilde a_j} = \braket[3]{a_i}{U^\dagger U}{a_j} = \braket{a_i}{a_j}$. So $\tilde c_2 = \ubraket{\tilde 2}{\tilde \psi} = \braket{2}{\psi} = c_2$. 
+
+ We have a planar system for $\tilde c_2, \tilde c_3$, with a coefficient matrix 
+ \[A = \begin{pmatrix}
+    i\omega_{23} - \Gamma/2 & -\Gamma/2 \\ 
+     -\Gamma/2  &  -\Gamma/2 
+ \end{pmatrix}\]
+ The time evolution of our amplitues is then 
+ \begin{align*}
+    \begin{pmatrix}
+    \tilde c_2(t) \\ \tilde c_3(t)
+    \end{pmatrix} = \begin{pmatrix}
+        1 \\ 0
+    \end{pmatrix}e^{At}
+ \end{align*}
+ with the initial conditions $\tilde c_2(0) = 1$ and $\tilde c_3(0) = 0$. We solve this using mathetmatica (see accompanying notebook), to get 
+  \begin{align*}
+    \Gamma \geq \omega, \qquad |c_2(t)|^2 &= \frac{e^{-t\Gamma}\ab((1 + \cosh(\Omega  t))\Gamma^2 - 2\omega^2)}{2\Omega^2}\\
+    |c_3(t)|^2 &= \frac{e^{-t\Gamma}\Gamma^2\ab(\cosh(\Omega t) - 1)}{2\Omega^2} \\[1.5em]
+    \Gamma < \omega ,\qquad|c_2(t)|^2 &= \frac{e^{-t\Gamma}\ab((1 + \cos(\Omega t))\Gamma^2 - 2\omega^2)}{2\Omega^2} \\ 
+    |c_3(t)|^2 &= \frac{e^{-t\Gamma}\Gamma^2\ab(\cos(\Omega t) - 1)}{2\Omega^2} 
+ \end{align*}
+ with $\Omega = \sqrt{|\Gamma^2 - \omega^2|}$.
+
+For $\Gamma = 0$, we just get $\tilde c_2(t) = e^{-i\omega_{23t}}$ and $\tilde c_3(t) = 0$, which is just the free evolution of the energy states as $\uket{\tilde 2}$ is $\omega_{23}$ above $\uket{\tilde 3}$ in energy. In this case, the system stays in the atomic states and no photons are emitted. We see that the populations have an expontial decay envelope with decay rate $\Gamma$. Thus, $\Gamma$ indicates how often the excited states spontaneously emit a photon.
+\end{ans}
+
+\begin{exc}{1d}
     
 \end{exc}
+\begin{ans}
+    With $\omega_{23} = 0$, Equation \ref{eqn:c2_c3_eoms} becomes
+    \begin{align*}
+            \dot{\tilde c}_2 &= -\Gamma/2(\tilde c_2 + \tilde c_3) \\ 
+        \dot{\tilde c}_3 &= -\Gamma/2(\tilde c_2 + \tilde c_3) 
+    \end{align*}
+    which yields 
+    \begin{align*}
+        \odv{}{t}(\tilde c_2 + \tilde c_3) &= -\Gamma/2 (\tilde c_2 + \tilde c_3) \implies \tilde c_2 + \tilde c_3 = (\alpha/2) e^{-\Gamma t/2} \\
+        \odv{}{t}(\tilde c_2 - \tilde c_3) &= 0  \implies \tilde c_2 - \tilde c_3 = \beta/2
+    \end{align*}
+    Where $\alpha$ and $\beta$ are determined by initial conditions. With this, we find 
+    \begin{align*}
+        \tilde c_2(t) &= \alpha e^{-\Gamma t/2} + \beta \\ 
+        \tilde c_3(t) &= \alpha e^{-\Gamma t/2} - \beta
+    \end{align*}
+    For complete decay, we need $\beta = 2(\tilde c_2(0) - \tilde c_3(0)) = 0 \implies \tilde c_2(0) = \tilde c_3(0)$. If we have no population in the $\ket k$ states to begin, then normalization requires $1 = |\tilde c_2(0)|^2 + |\tilde c_3(0)|^2 = 2|\tilde c_2(0)|^2$ so that the superposition which decays completely is given by 
+    \begin{align*}
+        \ket{\tub{\psi}{decay}} = \frac{\ket 2 + \ket 3}{\sqrt 2}
+    \end{align*}
+    unique up to a global phase. For no decay at all, we need $\alpha = 0$. Similar reasoning leads us to an antisymmetric state which does not decay. 
+    \[
+    \ket{\tub{\psi}{no decay}} = \frac{\ket 2 - \ket 3}{\sqrt 2}
+    \]
+    This state corresponds to when a photon decays from one atomic state and then reabsorbed to bring it to the other state.    
+
+    Beat frequency must depend on $\Gamma$ and $\omega_{23}$. Since $\Gamma$ controls decay rate, it is likely not involved. All that's left is $\omega_{23}$ so would assume beat frequency is $\propto \omega_{23}$.
+\end{ans}
+
+\newpage 
+\begin{exc}{2a}
+\end{exc}
+\begin{ans}
+    Let $\chi(t) = \int_0^t f(t')dt'$. For $s(t) = 1$, the Hamiltonian looks like 
+    \[\hat H(t) = \hbar\omega \hat S_z + \hbar f(t) \hat S_z\]
+    With this, the expectation of $\hat S_+ = \ketbra{2}{1}$ is given by
+    \[\ev{\hat S_+} = e^{i\omega t} \ev{e^{i\chi(t)}} \rho_{12}(0)\]
+    Since $\chi$ is an integral of gaussians, it is itself gaussian, with 0 mean and varianec $\sigma_t^2 = \ev{\chi(t)^2}$. Thus, 
+    \[\ev{e^{i\chi(t)}} = \int_{-\infty}^\infty \frac{e^{-\chi^2/2\sigma_t^2}}{\sqrt{2\pi \sigma_t^2}}e^{i\chi} d\chi = \mathcal F\ab\{\frac{e^{-\chi^2/2\sigma_t^2}}{\sqrt{2\pi \sigma_t^2}}\}(t = 1) = e^{-\sigma_t^2/2}\]
+    Thus, it remains to calculate $\sigma_t^2$
+    \begin{align*}
+        \sigma_t^2 &= \ev{\int_0^t f(t')dt' \int_0^t f(t'')dt''} = \int_0^t dt'\int_0^t \ev{f(t')f(t'')}dt''
+    \end{align*}
+    Changing variables to $\tau = t' - t'', d\tau = -dt''$ in the inner integral, and using the assumption $\ev{f(t + \tau)f(t)} = \ev{f(\tau)f(0)} = \Delta^2 e^{-|\tau|/\tau_c}$, we find 
+    \begin{align*}
+        \sigma_t^2 &= - \Delta^2  \int_0^t dt'\int_{t'}^{t' - t}e^{-|\tau|/\tau_c}d\tau = 2\Delta^2\tau_c(t - \tau_c(1 -  e^{-t/\tau_c}))
+    \end{align*}
+    where the integral was evaluated using mathematica (see accompanying notebook). We examine the limits 
+    \begin{enumerate}[(i)]
+        \item Short Correlation Time ($\tau_c \ll t$): In this limit $e^{-t/\tau_c} \to 0$ so $\sigma_t^2 \to 2\Delta^2 \tau_c(t - \tau_c)$ and we get 
+        \[ 
+        \ev{\hat S_+}_{\tau_c \ll t} = e^{i\omega t} e^{-\Delta^2 \tau_c(t - \tau_c)} \rho_{12}(0) 
+        \]
+        \item Long Correlation Time ($\tau_c \gg t$): Here, $e^{-t/\tau_c} \approx 1$ so that $\sigma_t^2 \to 2\Delta^2 \tau_c t$. Hence, 
+        \[        
+        \ev{\hat S_+}_{\tau_c \gg t} = e^{i\omega t} e^{-\Delta^2 \tau_c t} \rho_{12}(0)
+        \]
+    \end{enumerate}
+    We see that $\ev{\hat S_+}_{\tau_c \ll t} =  e^{\Delta^2 \tau_c^2} \cdot \ev{\hat S_+}_{\tau_c \gg t}$ and in both cases we can identify $T^*_2 = 1/\Delta^2 \tau_c$. 
+
+    In the limit $\tau_c \to 0$, we find $\sigma_t^2 \to 0$ and $T^*_2 \to \infty$, implying that the system does not lose coherence? The noise looks white in this limit, and it seems that the environment fluctuations end up canceling each other?
+\end{ans}
+
+\begin{exc}{2b}
+
+\end{exc}
+\begin{ans}
+    The propagator for the first half of the experiment, where $s(t) = +1$, looks like 
+    \begin{align*}
+        \hat U^{+} 
+        &= \exp(-\int_{0}^{t/2}\frac i\hbar H(t') dt')\\
+        &= \exp(-i\int_{0}^{t/2}(\omega + f(t')) \hat S_z dt')\\
+        &= \exp(-i(\omega t/2 + \int_0^{t/2}f(t')dt')\hat S_z)        
+    \end{align*}
+    Whereas, the propagator for the second half, where $s(t) = -1$ causing $H(t)$ to flip sign, looks like 
+    \[
+        \hat U^{-} = \exp(i(\omega t/2 + \int_{t/2}^{t}f(t')dt')\hat S_z) 
+    \]
+    The total propagator, $\hat U(t)$, is then 
+    \[\hat U(t) = \hat U^{-}\hat U^{+} = \exp(i (\int_{t/2}^{t}f(t')dt' - \int_{0}^{t/2}f(t')dt')\hat S_z)\]
+    Then, we find 
+    \[\ev{S_+} = \ev{e^{i(\int_{t/2}^{t}f(t')dt' - \int_{0}^{t/2}f(t')dt')} }\cdot S_+(0)\]
+    Letting $\chi(t) = \int_{t/2}^{t}f(t')dt' - \int_{0}^{t/2}f(t')dt'$ we have as before that $\ev{e^{i\chi(t)}} = e^{-\sigma_t^2/2}$. With $\sigma_t^2$ calculated as 
+    \begin{align*}
+        \sigma_t^2 &= \ev{\chi(t)^2}\\
+        &= \ev{(\int_{t/2}^{t}f(t')dt' - \int_{0}^{t/2}f(t')dt')(\int_{t/2}^{t}f(t'')dt'' - \int_{0}^{t/2}f(t'')dt'')}
+    \end{align*}
+    This computation reduces to two products 
+    \begin{align*}
+        \sigma^2_1(t) &= \int_{0}^{t/2}dt'\int_{0}^{t/2}\ev{f(t')f(t'')}dt''\\
+        \sigma^2_2(t) &= \int_{0}^{t/2}dt'\int_{t/2}^{t}\ev{f(t')f(t'')}dt''
+    \end{align*}
+    Then, $\sigma_t^2 = 2\sigma^2_1 - 2\sigma^2_2$. Using mathematica (see accompnying notebook), we find 
+    \[\sigma_t^2 = 2\Delta^2\tau_c(t  - (3 + e^{-t/\tau_c} - 4e^{-t/2\tau_c})\tau_c)\]
+    In $\tau_c \ll t$, we get $\sigma_t^2 \to 2\Delta^2\tau_c(t - 3\tau_c)$ so the decay rate is still $1/\Delta^2\tau_c$. For $\tau_c \gg t$, get same result?? Maybe expand to higher orders, or something wrong.
+
+    Long correlation time means the environment is not fluctuating much during the timescale of the experiment. In this case, the spin echo is reliable because the effect of the environment can be undone by the $\pi$ pulse. For shorter correlation times, the fluctuations are too large to undo.
+\end{ans}.
 \end{document}
